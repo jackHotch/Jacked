@@ -1,0 +1,24 @@
+.container {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 150%;
+}
+
+.container h1 {
+  margin: 0;
+}
+
+.description {
+  width: 50%;
+  margin: 40px auto 0px auto;
+}
+
+.thanks {
+  margin: 40px auto;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
