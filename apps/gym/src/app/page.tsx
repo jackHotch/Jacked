@@ -15,9 +15,9 @@ const Home = () => {
     <div className={styles.container}>
       <h1>Jack Hotchkiss's Gym Tracking App</h1>
       <p className={styles.description}>
-        Hello, this is a personal project I have am currently working on. It will be a web
-        app to track my progress in the gym. Currently only the Record and Weight pages
-        have content. Please feel free to play around with this website. I have linked the
+        Hello, this is a personal project I am currently working on. It will be a web app
+        to track my progress in the gym. Currently only the Record and Weight pages have
+        content. Please feel free to play around with this website. I have linked the
         GitHub repository for this project below.
       </p>
       <p className={styles.thanks}>Thank You!</p>
