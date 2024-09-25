@@ -27,8 +27,6 @@ async function insertIntoMySql(rows) {
     password: '12345',
   })
 
-  // postgresql://root:YyIXh8l34uvgoobntz0TJYXpocNqu32e@dpg-cq2qgd4s1f4s73f3urfg-a.ohio-postgres.render.com/gymapppg
-
   pool.connect()
 
   for (const name of rows) {
