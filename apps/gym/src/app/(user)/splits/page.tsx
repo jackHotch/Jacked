@@ -1,9 +1,9 @@
+'use client'
 
+import styles from './Splits.module.css'
 
 const Splits = () => {
-  return (
-    <div>Splits</div>
-  )
+  return <h1 className={styles.heading}>To Be Finished...</h1>
 }
 
 export default Splits
