@@ -42,7 +42,7 @@ async function insertIntoMySql(rows) {
   const pool = new Pool({
     host: '127.0.0.1',
     port: 5432,
-    database: 'gymapp',
+    database: 'gymapp_resume',
     user: 'postgres',
     password: '12345',
   })
