@@ -2,7 +2,6 @@
   text-align: center;
   margin-top: 40px;
   font-size: 150%;
-  
 }
 
 .container h1 {
@@ -30,4 +29,10 @@
   margin: auto;
   width: max-content;
   gap: 10px;
+}
+
+@media (width < 480px) {
+  .description {
+    width: 90%;
+  }
 }
