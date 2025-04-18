@@ -3,10 +3,8 @@
 import styles from './Home.module.css'
 import { Button } from '@gymapp/gymui/Button'
 import { useRouter } from 'next/navigation'
-import { useFeatureFlag } from '@/hooks'
 
 const Home = () => {
-  const { data } = useFeatureFlag('Welcome_Message')
   const router = useRouter()
 
   const handleClick = () => {
@@ -19,7 +17,13 @@ const Home = () => {
         Jack Hotchkiss's Gym Tracking App
         <img src='/images/dumbbell-blue.png' alt='Dumbbell Icon' width={45} />
       </h1>
-      <p className={styles.description}>{data?.message}</p>
+      <p className={styles.description}>
+        Hi, this is a personal project I am currently working on. It will be a web app to
+        track my progress in the gym. Currently the app is fully responsive and only the
+        Record and Weight pages have content. Please feel free to play around with this
+        website and I have linked the GitHub repository for this project below if you want
+        to check it out.
+      </p>
       <p className={styles.thanks}>Thank You!</p>
       <div className={styles.buttons}>
         <Button.Primary onClick={() => router.push('/dashboard')} size='medium'>
