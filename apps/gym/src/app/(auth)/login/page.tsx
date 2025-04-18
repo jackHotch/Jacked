@@ -10,6 +10,7 @@ import Image from 'next/image'
 import { motion } from 'motion/react'
 import { login, signInWithGoogle } from '@/actions/auth'
 import { loginSchema } from '@/constants'
+import { Credentials } from '@/components/isolated/Login/Credentials/Credentials'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -55,49 +56,52 @@ const Login = () => {
   }
 
   return (
-    <form className={styles.container}>
-      <motion.div layout className={styles.card}>
-        <h1>Log In</h1>
+    <>
+      <form className={styles.container}>
+        <motion.div layout className={styles.card}>
+          <h1>Log In</h1>
 
-        <div className={styles.input_container}>
-          <Form.Text.Outline
-            placeholder='Email Address'
-            name='email'
-            value={loginData.email}
-            onChange={handleChange}
-          />
-          <Form.Text.Password
-            placeholder='Password'
-            name='password'
-            value={loginData.password}
-            onChange={handleChange}
-          />
-          <Error isVisible={loginError ? true : false}>{loginError}</Error>
-        </div>
+          <div className={styles.input_container}>
+            <Form.Text.Outline
+              placeholder='Email Address'
+              name='email'
+              value={loginData.email}
+              onChange={handleChange}
+            />
+            <Form.Text.Password
+              placeholder='Password'
+              name='password'
+              value={loginData.password}
+              onChange={handleChange}
+            />
+            <Error isVisible={loginError ? true : false}>{loginError}</Error>
+          </div>
 
-        <div className={styles.button_container}>
-          {isLoading ? (
-            <Button.Loading sx={{ padding: '12px' }} />
-          ) : (
-            <Button.Primary
+          <div className={styles.button_container}>
+            {isLoading ? (
+              <Button.Loading sx={{ padding: '12px' }} />
+            ) : (
+              <Button.Primary
+                type='submit'
+                sx={{ padding: '12px', fontSize: '16px' }}
+                onClick={handleLogin}
+              >
+                Log In
+              </Button.Primary>
+            )}
+            <button
+              className={styles.google_button}
               type='submit'
-              sx={{ padding: '12px', fontSize: '16px' }}
-              onClick={handleLogin}
+              onClick={handleGoogleSignUp}
             >
-              Log In
-            </Button.Primary>
-          )}
-          <button
-            className={styles.google_button}
-            type='submit'
-            onClick={handleGoogleSignUp}
-          >
-            <Image src='/images/google.png' alt='Google Icon' width={20} height={20} />
-            Sign In With Google
-          </button>
-        </div>
-      </motion.div>
-    </form>
+              <Image src='/images/google.png' alt='Google Icon' width={20} height={20} />
+              Sign In With Google
+            </button>
+          </div>
+        </motion.div>
+        <Credentials />
+      </form>
+    </>
   )
 }
 
