@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express'
-const router = express.Router()
+import express, { Request, Response, Router } from 'express'
+const router: Router = express.Router()
 
 import { getCurrentWorkoutNumber, getWorkout, insertWorkout } from '../database/Workouts'
 

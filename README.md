@@ -7,7 +7,7 @@
 > [!NOTE]
 > This app is a work in progress
 
-![Screenshot](/assets/screenshot.png)
+![Screenshot](https://mzmmssydwsmrzjnkiwal.supabase.co/storage/v1/object/sign/test-bucket/Readme/screenshot.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8yMmEyN2YzMy04NmM1LTQxODktOTQ3ZC00NTdmMTY0ODNkMWUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ0ZXN0LWJ1Y2tldC9SZWFkbWUvc2NyZWVuc2hvdC5wbmciLCJpYXQiOjE3NTM4MzcyOTQsImV4cCI6NDg3NTkwMTI5NH0.IQvTSvKO9CushMSElXrGalF4QmwtB5rAkoYyiyD3gRU)
 
 ## 📚 About
 
@@ -81,7 +81,7 @@ gymapp
 
 This is a custom component library made specifically for this application
 
-![Screenshot](/assets/gymui.png)
+![Screenshot](https://mzmmssydwsmrzjnkiwal.supabase.co/storage/v1/object/sign/test-bucket/Readme/gymui.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8yMmEyN2YzMy04NmM1LTQxODktOTQ3ZC00NTdmMTY0ODNkMWUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ0ZXN0LWJ1Y2tldC9SZWFkbWUvZ3ltdWkucG5nIiwiaWF0IjoxNzUzODM3MjEyLCJleHAiOjQ4NzU5MDEyMTJ9.u_UMEUqBIIYYt0lGTEZyK9Dua_xaW0Swqnyp_rt2IBU)
 
 To run the component library in storybook
 
