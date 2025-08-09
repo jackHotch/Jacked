@@ -5,14 +5,16 @@ import { getCurrentSplit, getAllSplits } from '../database/Splits'
 
 router.get('/', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-  const rows = await getAllSplits(userId)
-  res.status(200).json(rows)
+
+  const { statusCode, ...response } = await getAllSplits(userId)
+  return res.status(statusCode).json({ ...response })
 })
 
 router.get('/current', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-  const rows = await getCurrentSplit(userId)
-  res.json(rows[0])
+
+  const { statusCode, ...response } = await getCurrentSplit(userId)
+  return res.status(statusCode).json({ ...response })
 })
 
 export default router
