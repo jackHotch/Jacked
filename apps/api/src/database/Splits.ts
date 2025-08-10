@@ -11,11 +11,8 @@ export async function cronjob() {
 }
 
 export async function getAllSplits(userId: string) {
-  if (!userId) {
-    return formatResponse(400, { message: 'UserID is required' })
-  }
-
   const client = await pool.connect()
+
   try {
     const splits = await client.query(
       `
@@ -37,11 +34,8 @@ export async function getAllSplits(userId: string) {
 }
 
 export async function getCurrentSplit(userId: string) {
-  if (!userId) {
-    return formatResponse(400, { message: 'UserID is required' })
-  }
-
   const client = await pool.connect()
+
   try {
     const currentSplit = await client.query(
       `SELECT name FROM splits WHERE active = 1 AND user_id = $1`,

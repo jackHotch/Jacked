@@ -4,11 +4,8 @@ import { formatResponse } from '../utils/utils'
 dotenv.config()
 
 export async function getExercises(userId: string) {
-  if (!userId) {
-    return formatResponse(400, { message: 'UserID is required' })
-  }
-
   const client = await pool.connect()
+
   try {
     const exercises = await client.query(
       `SELECT exercise_id, user_id, name, is_default FROM exercises
@@ -30,20 +27,30 @@ export async function getExercises(userId: string) {
 }
 
 export async function insertExercise(userId: string, name: string) {
-  if (!userId) {
-    return formatResponse(400, { message: 'UserID is required' })
-  }
-
   if (!name) {
     return formatResponse(400, { message: 'Exercise name is required' })
   }
 
   const client = await pool.connect()
+
   try {
+    const exerciseExists = await client.query(
+      `SELECT 1 FROM exercises
+       WHERE name = $1 
+       AND user_id = $2
+       OR is_default = 1`,
+      [name, userId]
+    )
+
+    if (exerciseExists.rowCount === 1) {
+      return formatResponse(400, { message: 'Exercise already exists' })
+    }
+
     const result = await client.query(
       `INSERT INTO exercises (name, user_id) VALUES ($1, $2)`,
       [name, userId]
     )
+
     if (result.rowCount !== 1) {
       return formatResponse(400, { message: 'Failed to insert exercise' })
     }
