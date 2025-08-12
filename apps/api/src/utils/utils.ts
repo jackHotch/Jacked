@@ -1,4 +1,4 @@
-import { HTTPError } from './Error'
+import { HTTPError } from './error'
 
 interface data {
   data?: any

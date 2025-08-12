@@ -26,13 +26,28 @@ export async function getAllWeight(userId: string) {
 }
 
 export async function getWeight(userId: string, id: string) {
+  if (!id) {
+    return formatResponse(400, { message: 'Weight ID is required' })
+  }
+
   const client = await pool.connect()
-  const { rows } = await client.query(
-    `SELECT * FROM weights WHERE user_id = $1 AND weight_id = $2`,
-    [userId, id]
-  )
-  client.release()
-  return rows
+  try {
+    const weight = await client.query(
+      `SELECT weight, date FROM weights WHERE user_id = $1 AND weight_id = $2`,
+      [userId, id]
+    )
+
+    if (weight.rowCount !== 1) {
+      return formatResponse(404, { message: 'Weight not found' })
+    }
+
+    return formatResponse(200, { data: weight.rows[0] })
+  } catch (err) {
+    console.error('Error in GET /weights/:id')
+    return formatResponse(500)
+  } finally {
+    client.release()
+  }
 }
 
 export async function createEntry(userId: string, weight: number, date: string) {

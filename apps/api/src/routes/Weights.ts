@@ -11,8 +11,9 @@ import {
 
 router.get('/', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-  const rows = await getAllWeight(userId)
-  res.status(200).json(rows)
+
+  const { statusCode, ...response } = await getAllWeight(userId)
+  res.status(statusCode).json({ ...response })
 })
 
 router.post('/', async (req: Request, res: Response) => {
@@ -31,10 +32,9 @@ router.get('/current', async (req: Request, res: Response) => {
 router.get('/:id', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
   const id = req.params.id
-  const row = await getWeight(userId, id)
 
-  if (row.length == 0) res.status(400).json({ error: 'No matching records' })
-  else res.status(200).json(row)
+  const { statusCode, ...response } = await getWeight(userId, id)
+  return res.status(statusCode).json({ ...response })
 })
 
 router.delete('/:id', async (req: Request, res: Response) => {
