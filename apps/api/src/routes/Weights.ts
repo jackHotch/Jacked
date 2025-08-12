@@ -19,14 +19,15 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
   const { weight, date } = req.body
-  await createEntry(userId, weight, date)
-  res.sendStatus(201)
+
+  const { statusCode, ...response } = await createEntry(userId, weight, date)
+  res.status(statusCode).json({ ...response })
 })
 
 router.get('/current', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-  const row = await getCurrentWeight(userId)
-  res.status(200).json(row[0])
+  const { statusCode, ...response } = await getCurrentWeight(userId)
+  res.status(statusCode).json({ ...response })
 })
 
 router.get('/:id', async (req: Request, res: Response) => {
@@ -40,8 +41,9 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
   const id = req.params.id
-  await deleteEntry(userId, id)
-  res.sendStatus(204)
+
+  const { statusCode, ...response } = await deleteEntry(userId, id)
+  return res.status(statusCode).json({ ...response })
 })
 
 export default router

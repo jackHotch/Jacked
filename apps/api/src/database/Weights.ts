@@ -51,30 +51,86 @@ export async function getWeight(userId: string, id: string) {
 }
 
 export async function createEntry(userId: string, weight: number, date: string) {
+  if (!weight) {
+    return formatResponse(400, { message: 'Weight is required' })
+  }
+
+  if (!date) {
+    return formatResponse(400, { message: 'Date is required' })
+  }
+
   const client = await pool.connect()
-  await client.query(`INSERT INTO weights (user_id, weight, date) VALUES ($1, $2, $3)`, [
-    userId,
-    weight,
-    date,
-  ])
-  client.release()
+  try {
+    const result = await client.query(
+      `
+      INSERT INTO weights (user_id, weight, date) 
+      VALUES ($1, $2, $3)`,
+      [userId, weight, date]
+    )
+
+    if (result.rowCount !== 1) {
+      return formatResponse(400, { message: 'Failed to insert weight' })
+    }
+
+    return formatResponse(201, { message: 'Weight entry created' })
+  } catch (err) {
+    console.error('Error in POST /weights:', err)
+  } finally {
+    client.release()
+  }
 }
 
 export async function deleteEntry(userId: string, id: string) {
+  if (!id) {
+    return formatResponse(400, { message: 'ID is required' })
+  }
+
   const client = await pool.connect()
-  await client.query(`DELETE FROM weights WHERE user_id = $1 AND weight_id = $2`, [
-    userId,
-    id,
-  ])
-  client.release()
+  try {
+    await client.query(`BEGIN`)
+    const result = await client.query(
+      `DELETE FROM weights WHERE user_id = $1 AND weight_id = $2`,
+      [userId, id]
+    )
+
+    if (result.rowCount < 1) {
+      await client.query(`ROLLBACK`)
+      return formatResponse(404, { message: 'Failed to delete entry' })
+    }
+
+    if (result.rowCount > 1) {
+      await client.query(`ROLLBACK`)
+      return formatResponse(404, { message: 'Multiple records founds' })
+    }
+
+    await client.query(`COMMIT`)
+    return formatResponse(200, { message: 'Entry deleted' })
+  } catch (err) {
+    console.error('Error in DELETE /weights/:id', err)
+    await client.query(`ROLLBACK`)
+    return formatResponse(500)
+  } finally {
+    client.release()
+  }
 }
 
 export async function getCurrentWeight(userId: string) {
   const client = await pool.connect()
-  const { rows } = await client.query(
-    `SELECT weight, date FROM weights WHERE user_id = $1 ORDER BY date DESC LIMIT 1`,
-    [userId]
-  )
-  client.release()
-  return rows
+  try {
+    const weight = await client.query(
+      `SELECT weight, date FROM weights WHERE user_id = $1 ORDER BY date DESC LIMIT 1`,
+      [userId]
+    )
+
+    if (weight.rowCount !== 1) {
+      return formatResponse(404, { message: 'Failed to find current weight' })
+    }
+
+    return formatResponse(200, { data: weight.rows[0] })
+  } catch (err) {
+    console.error('Error in GET /weights/current')
+    return formatResponse(500)
+  } finally {
+    client.release()
+  }
 }

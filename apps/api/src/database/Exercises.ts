@@ -9,7 +9,7 @@ export async function getExercises(userId: string) {
   try {
     const exercises = await client.query(
       `SELECT exercise_id, user_id, name, is_default FROM exercises
-         WHERE is_default = 1 OR user_id = $1`,
+       WHERE is_default = 1 OR user_id = $1`,
       [userId]
     )
 
