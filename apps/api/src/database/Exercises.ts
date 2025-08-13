@@ -52,7 +52,7 @@ export async function insertExercise(userId: string, name: string) {
     )
 
     if (result.rowCount !== 1) {
-      return formatResponse(400, { message: 'Failed to insert exercise' })
+      return formatResponse(422, { message: 'Failed to insert exercise' })
     }
 
     return formatResponse(201, { message: 'Exercise created' })

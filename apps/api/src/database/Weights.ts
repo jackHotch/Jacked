@@ -69,7 +69,7 @@ export async function createEntry(userId: string, weight: number, date: string) 
     )
 
     if (result.rowCount !== 1) {
-      return formatResponse(400, { message: 'Failed to insert weight' })
+      return formatResponse(422, { message: 'Failed to insert weight' })
     }
 
     return formatResponse(201, { message: 'Weight entry created' })

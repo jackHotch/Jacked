@@ -18,6 +18,11 @@ export const HTTPError = {
     error: 'Resource not found',
     statusCode: 404,
   },
+  422: {
+    code: 'UNPROCESSABLE_CONTENT',
+    error: 'Server was unable to process the contained instructions',
+    statusCode: 422,
+  },
   500: {
     code: 'INTERNAL_SERVER_ERROR',
     error: 'Something went wrong, Please try again later.',
