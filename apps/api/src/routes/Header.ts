@@ -5,5 +5,9 @@ import { getHeaderData } from '../database/Header'
 
 router.get('/', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-  const headerdata = await getHeaderData(userId)
+
+  const { statusCode, ...response } = await getHeaderData(userId)
+  res.status(statusCode).json({ ...response })
 })
+
+export default router

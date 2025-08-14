@@ -43,4 +43,7 @@ app.use(`/${VERSION}/weights`, weightsRouter)
 import workoutsRouter from './routes/Workouts'
 app.use(`/${VERSION}/workouts`, workoutsRouter)
 
+import headerRouter from './routes/Header'
+app.use(`/${VERSION}/header`, headerRouter)
+
 export default app
