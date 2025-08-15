@@ -5,7 +5,9 @@ export const useCreateExercise = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (name: string) => createExercise(name),
+    mutationFn: (name: string) => {
+      return createExercise(name)
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['exercises'] })
     },
