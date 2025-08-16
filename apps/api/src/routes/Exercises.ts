@@ -1,21 +1,19 @@
-import express, { Request, Response, Router } from 'express'
-const router: Router = express.Router()
+import express, { Request, Response } from 'express'
+const router = express.Router()
 
 import { getExercises, insertExercise } from '../database/Exercises'
 
 router.get('/', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-
-  const { statusCode, ...response } = await getExercises(userId)
-  return res.status(statusCode).json({ ...response })
+  const rows = await getExercises(userId)
+  res.json(rows)
 })
 
 router.post('/', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
   const name = req.body.name
-
-  const { statusCode, ...response } = await insertExercise(userId, name)
-  return res.status(statusCode).json({ ...response })
+  await insertExercise(userId, name)
+  res.sendStatus(201)
 })
 
 export default router

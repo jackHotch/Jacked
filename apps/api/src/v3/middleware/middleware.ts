@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { formatResponse } from '../utils/utils'
+import { formatResponse } from '../../utils/utils'
 import * as z from 'zod'
 
 export const userIdMiddleware = (req: Request, res: Response, next: NextFunction) => {

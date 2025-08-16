@@ -1,6 +1,6 @@
-import { pool } from '../db'
+import { pool } from '../../db'
 import dotenv from 'dotenv'
-import { formatResponse } from '../utils/utils'
+import { formatResponse } from '../../utils/utils'
 dotenv.config()
 
 export async function getHeaderData(userId: string) {
