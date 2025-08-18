@@ -4,19 +4,20 @@ import styles from './WeightList.module.css'
 import { WeightListEntry } from './WeightListEntry/WeightListEntry'
 import { useWeight } from '@/hooks/api/useWeight'
 import { Loading } from '@gymapp/gymui/Loading'
-import { convertDate } from '@/utils/utils'
 import { Card } from '@gymapp/gymui/Card'
+import { IWeightData } from '@/types'
 
 export const WeightList = () => {
   const { data, isLoading } = useWeight()
-  const weight = convertDate(data)
+  var weight: IWeightData[]
+  if (isLoading == false && data.status == 'success') {
+    weight = data.data
+  } else {
+    // add toast error message
+  }
 
-  let reversedArray: number[] = []
-  weight?.map((_, index) => {
-    return reversedArray.push(index)
-  })
-  reversedArray.reverse()
-  const reversedWeight = weight?.toReversed()
+  const reversedIndexes = weight ? [...weight.keys()].reverse() : []
+  const reversedWeight = weight?.slice().reverse()
 
   return (
     <Card sx={{ height: 'calc(100% - 32px)', overflow: 'scroll' }}>
@@ -39,20 +40,16 @@ export const WeightList = () => {
           ) : data.length == 0 ? (
             <span className={styles.no_data}>No Data</span>
           ) : (
-            reversedWeight?.map((value, key) => {
-              const difference =
-                key == reversedArray[0]
-                  ? ''
-                  : (
-                      data[reversedArray[key]]?.weight -
-                      data[reversedArray[key + 1]]?.weight
-                    ).toFixed(1)
+            reversedWeight?.map((value, index) => {
+              const prev = reversedWeight[index + 1]
+              const difference = prev ? (value.weight - prev.weight).toFixed(1) : null
+
               return (
                 <WeightListEntry
-                  key={key}
+                  key={index}
                   value={value}
-                  id={reversedArray[key] + 1}
-                  difference={Number(difference)}
+                  id={reversedIndexes[index] + 1}
+                  difference={difference ? Number(difference) : undefined}
                 />
               )
             })

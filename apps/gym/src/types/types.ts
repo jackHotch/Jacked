@@ -45,7 +45,7 @@ export interface ChartProps {
 
 export interface SearchbarProps {
   placeholder: string
-  data: any | undefined
+  data: IExercises[] | undefined
   newExercise: IWorkout[]
   setNewExercise: Dispatch<SetStateAction<IWorkout[]>>
 }

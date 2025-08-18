@@ -3,8 +3,10 @@
 import { IWeightData, IWeightEntry } from '@/types'
 import axios from 'axios'
 import { getSupabaseUserId } from '@/utils/supabase/utils'
+import { convertDate } from '@/utils/utils'
 
-const URL = process.env.URL + '/' + process.env.API_VERSION + '/weights'
+// const URL = process.env.URL + '/' + process.env.API_VERSION + '/weights'
+const URL = process.env.URL + '/v3/weights'
 
 export const getWeight = async () => {
   const userId = await getSupabaseUserId()
@@ -13,7 +15,8 @@ export const getWeight = async () => {
       userId: userId,
     },
   })
-  return data as IWeightData[]
+  data.data = convertDate(data.data)
+  return data
 }
 
 export const addWeight = async (entry: IWeightEntry) => {

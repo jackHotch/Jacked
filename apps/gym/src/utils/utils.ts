@@ -1,12 +1,11 @@
 import { IWeightData } from '@/types'
 import dayjs from 'dayjs'
 
-export const convertDate = (data: IWeightData[]) => {
-  const formattedDate = data?.map((entry) => ({ ...entry }))
-  for (let i = 0; i < data?.length; i++) {
-    formattedDate[i].date = dayjs(data[i].date).format('MM/DD/YYYY')
-  }
-  return formattedDate
+export const convertDate = (data: IWeightData[] = []) => {
+  return data.map((entry) => ({
+    ...entry,
+    date: dayjs(entry.date).format('MM/DD/YYYY'),
+  }))
 }
 
 export const getChartData = (list: IWeightData[]) => {

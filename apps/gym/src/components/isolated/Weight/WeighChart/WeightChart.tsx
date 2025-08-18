@@ -16,7 +16,7 @@ export const WeightChart = () => {
   const [weightData, setWeightData] = useState([])
 
   useEffect(() => {
-    const [l, d] = getChartData(data)
+    const [l, d] = getChartData(data?.data)
     setLabels(l)
     setWeightData(d)
   }, [data])
