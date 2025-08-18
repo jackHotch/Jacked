@@ -2,22 +2,23 @@
 
 import axios from 'axios'
 import { getSupabaseUserId } from '@/utils/supabase/utils'
-import { IExercises } from '@/types'
 
-const URL = process.env.URL + '/' + process.env.API_VERSION + '/exercises'
+// const URL = process.env.URL + '/' + process.env.API_VERSION + '/exercises'
+const URL = process.env.URL + '/v3/exercises'
 
 export const getExercises = async () => {
   const userId = await getSupabaseUserId()
-  return (await axios.get(URL, {
+  const { data } = await axios.get(URL, {
     params: {
       userId: userId,
     },
-  })) as IExercises[]
+  })
+  return data
 }
 
 export const createExercise = async (name: string) => {
   const userId = await getSupabaseUserId()
-  return await axios.post(
+  const { data } = await axios.post(
     URL,
     { name },
     {
@@ -26,4 +27,5 @@ export const createExercise = async (name: string) => {
       },
     }
   )
+  return data
 }

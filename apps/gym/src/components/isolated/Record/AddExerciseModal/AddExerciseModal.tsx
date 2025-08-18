@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { AddExerciseModalProps } from '@/types'
+import { AddExerciseModalProps, IExercises } from '@/types'
 import { IWorkout } from '@/types'
 import styles from './AddExerciseModal.module.css'
 import { Searchbar } from '@/components/reusable/Searchbar/Searchbar'
@@ -10,15 +10,17 @@ import { useExercises } from '@/hooks'
 import { Button } from '@gymapp/gymui/Button'
 import { Modal } from '@gymapp/gymui/Modal'
 
-export const AddExerciseModal = ({
-  open,
-  setOpen,
-  workout,
-  setWorkout,
-}: AddExerciseModalProps) => {
+export const AddExerciseModal = ({ open, setOpen, workout, setWorkout }: AddExerciseModalProps) => {
   const [newExercises, setNewExercises] = useState<IWorkout[]>([])
   const [showCreateExerciseModal, setShowCreateExerciseModal] = useState(false)
-  const { data: exercises } = useExercises()
+
+  const { data } = useExercises()
+  var exercises: IExercises[]
+  if (data?.status == 'success') {
+    exercises = data.data
+  } else {
+    // add toast error message
+  }
 
   const removeExercise = (i: number) => {
     const temp = [...newExercises]
@@ -42,10 +44,7 @@ export const AddExerciseModal = ({
       <Modal.Content sx={{ width: '500px', height: '600px' }}>
         <Modal.Header>
           <Modal.Title>
-            <CreateNewExerciseModal
-              open={showCreateExerciseModal}
-              setOpen={setShowCreateExerciseModal}
-            />
+            <CreateNewExerciseModal open={showCreateExerciseModal} setOpen={setShowCreateExerciseModal} />
           </Modal.Title>
         </Modal.Header>
         <div className={styles.searchbar}>
@@ -61,10 +60,7 @@ export const AddExerciseModal = ({
             return (
               <div key={key} className={styles.future_exercise}>
                 {value.name}
-                <span
-                  className={styles.exercises_clear_btn}
-                  onClick={() => removeExercise(key)}
-                >
+                <span className={styles.exercises_clear_btn} onClick={() => removeExercise(key)}>
                   X
                 </span>
               </div>
