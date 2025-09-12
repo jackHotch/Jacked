@@ -6,7 +6,9 @@ export const useAddWeight = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (entry: IWeightEntry) => addWeight(entry),
+    mutationFn: (entry: IWeightEntry) => {
+      return addWeight(entry)
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['weight'] })
     },

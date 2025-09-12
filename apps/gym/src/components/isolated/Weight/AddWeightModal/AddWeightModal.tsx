@@ -17,7 +17,7 @@ import AddIcon from '@mui/icons-material/Add'
 export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
   const [weight, setWeight] = useState('')
   const [date, setDate] = useState<any>(dayjs())
-  const { mutate: addWeight } = useAddWeight()
+  const { mutate: addWeight, data: res, error } = useAddWeight()
   const screen = useWindowDimensions()
   const isMobile = screen.width < 480
 
@@ -26,8 +26,17 @@ export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
   }
 
   const handleSubmit = () => {
-    addWeight({ weight: weight, date: date.format('YYYY-MM-DD') })
-    setOpen(false)
+    addWeight(
+      { weight: weight, date: date.format('YYYY-MM-DD') },
+      {
+        onSuccess: () => {
+          setOpen(false)
+        },
+        onError: () => {
+          // show toast error here
+        },
+      }
+    )
   }
 
   const handleChange = (d: any) => {
