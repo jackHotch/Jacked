@@ -32,7 +32,7 @@ export const HeaderDesktop = ({}: HeaderDesktopProps) => {
             </Button.Text>
           </Link>
         ) : (
-          <span>{currentWeight.weight} lbs</span>
+          <span>{currentWeight.data.weight} lbs</span>
         )}
         <span className={styles.label}> | Weight </span>
       </div>

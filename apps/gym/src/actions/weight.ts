@@ -19,6 +19,16 @@ export const getWeight = async () => {
   return data
 }
 
+export const getCurrentWeight = async () => {
+  const userId = await getSupabaseUserId()
+  const { data } = await axios.get(`${URL}/current`, {
+    params: {
+      userId: userId,
+    },
+  })
+  return data
+}
+
 export const addWeight = async (entry: IWeightEntry) => {
   const userId = await getSupabaseUserId()
   const { data } = await axios.post(URL, entry, {
@@ -26,7 +36,7 @@ export const addWeight = async (entry: IWeightEntry) => {
       userId: userId,
     },
   })
-  return data as string
+  return data
 }
 
 export const deleteWeight = async (id: number) => {
@@ -40,12 +50,3 @@ export const deleteWeight = async (id: number) => {
   })
 }
 
-export const getCurrentWeight = async () => {
-  const userId = await getSupabaseUserId()
-  const { data } = await axios.get(`${URL}/current`, {
-    params: {
-      userId: userId,
-    },
-  })
-  return data as IWeightEntry
-}
