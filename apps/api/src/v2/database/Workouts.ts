@@ -1,6 +1,6 @@
-import { pool } from '../db'
+import { pool } from '../../db'
 import dotenv from 'dotenv'
-import { IExercises } from '../globals'
+import { IExercises } from '../../globals'
 
 dotenv.config()
 
