@@ -1,6 +1,6 @@
 'use server'
 
-import { IWeightData, IWeightEntry } from '@/types'
+import { IWeightEntry } from '@/types'
 import axios from 'axios'
 import { getSupabaseUserId } from '@/utils/supabase/utils'
 import { convertDate } from '@/utils/utils'

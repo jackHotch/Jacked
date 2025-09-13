@@ -1,6 +1,5 @@
 'use server'
 
-import { ICurrentSplit } from '@/types'
 import { getSupabaseUserId } from '@/utils/supabase/utils'
 import axios from 'axios'
 
