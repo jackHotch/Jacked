@@ -41,12 +41,11 @@ export const addWeight = async (entry: IWeightEntry) => {
 
 export const deleteWeight = async (id: number) => {
   const userId = await getSupabaseUserId()
-  console.log(userId)
-  console.log(id)
-  await axios.delete(`${URL}/${id}`, {
+  const { data } = await axios.delete(`${URL}/${id}`, {
     params: {
       userId: userId,
     },
   })
+  return data
 }
 
