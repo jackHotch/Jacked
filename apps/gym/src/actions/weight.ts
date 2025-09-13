@@ -5,8 +5,7 @@ import axios from 'axios'
 import { getSupabaseUserId } from '@/utils/supabase/utils'
 import { convertDate } from '@/utils/utils'
 
-// const URL = process.env.URL + '/' + process.env.API_VERSION + '/weights'
-const URL = process.env.URL + '/v3/weights'
+const URL = process.env.URL + '/' + process.env.API_VERSION + '/weights'
 
 export const getWeight = async () => {
   const userId = await getSupabaseUserId()
