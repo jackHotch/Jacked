@@ -3,8 +3,7 @@
 import axios from 'axios'
 import { getSupabaseUserId } from '@/utils/supabase/utils'
 
-// const URL = process.env.URL + '/' + process.env.API_VERSION + '/exercises'
-const URL = process.env.URL + '/v3/exercises'
+const URL = process.env.URL + '/' + process.env.API_VERSION + '/exercises'
 
 export const getExercises = async () => {
   const userId = await getSupabaseUserId()
