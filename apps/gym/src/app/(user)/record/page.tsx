@@ -7,8 +7,7 @@ import { Loading } from '@gymapp/gymui/Loading'
 import { Button } from '@gymapp/gymui/Button'
 
 const Record = () => {
-  const { data: currentSplit, isLoading } = useCurrentSplit()
-  const isEmpty = !isLoading && !currentSplit
+  const { data: currentSplit, isLoading, isEmpty } = useCurrentSplit()
 
   return (
     <div className={styles.container}>
@@ -23,7 +22,7 @@ const Record = () => {
       ) : isEmpty ? (
         <h1 className={styles.split_name}>No Split Created</h1>
       ) : (
-        <h1 className={styles.split_name}>{currentSplit?.name}</h1>
+        <h1 className={styles.split_name}>{currentSplit?.data.name}</h1>
       )}
       <Link href='/record/workout' className={styles.button}>
         <Button.Primary size='xlarge'>Start Workout</Button.Primary>

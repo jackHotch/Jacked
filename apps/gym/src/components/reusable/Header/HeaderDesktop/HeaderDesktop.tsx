@@ -45,7 +45,7 @@ export const HeaderDesktop = ({}: HeaderDesktopProps) => {
             <Button.Text sx={{ display: 'inline' }}>Create your first Split</Button.Text>
           </Link>
         ) : (
-          <span>{currentSplit.name}</span>
+          <span>{currentSplit.data.name}</span>
         )}
         <span className={styles.label}> | Current Split </span>
       </div>
