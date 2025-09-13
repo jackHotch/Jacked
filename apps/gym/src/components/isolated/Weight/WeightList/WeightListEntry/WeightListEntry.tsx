@@ -5,12 +5,18 @@ import { useToggle } from '@/hooks'
 import { useDeleteWeight } from '@/hooks'
 
 export const WeightListEntry = ({ value, id, difference }: WeightListEntryProps) => {
-  const [showEntryPopover, setShowEntryPopover] = useToggle()
+  const [showEntryPopover, setShowEntryPopover, , closeEntryPopover] = useToggle()
   const { mutate: deleteWeight } = useDeleteWeight()
 
   const deleteEntry = () => {
-    deleteWeight(value.weight_id)
-    close()
+    deleteWeight(value.weight_id, {
+      onSuccess: () => {
+        closeEntryPopover()
+      },
+      onError: () => {
+        // show toast error here
+      },
+    })
   }
 
   return (

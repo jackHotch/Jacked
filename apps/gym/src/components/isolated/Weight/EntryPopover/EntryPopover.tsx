@@ -9,7 +9,7 @@ export const EntryPopover = ({ open, setOpen, deleteEntry }: EntryPopoverProps) 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <Popover.Trigger>
-        <MoreVertIcon />
+        <MoreVertIcon style={{ cursor: 'pointer' }} />
       </Popover.Trigger>
       <Popover.Content>
         <Popover.Item variant='danger' onClick={deleteEntry}>

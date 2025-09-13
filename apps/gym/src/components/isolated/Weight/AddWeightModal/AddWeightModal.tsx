@@ -17,7 +17,7 @@ import AddIcon from '@mui/icons-material/Add'
 export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
   const [weight, setWeight] = useState('')
   const [date, setDate] = useState<any>(dayjs())
-  const { mutate: addWeight, data: res, error } = useAddWeight()
+  const { mutate: addWeight } = useAddWeight()
   const screen = useWindowDimensions()
   const isMobile = screen.width < 480
 
