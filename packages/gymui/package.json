@@ -13,7 +13,8 @@
     "./Calendar": "./src/components/Calendar/Calendar.tsx",
     "./Error": "./src/components/Error/Error.tsx",
     "./Hamburger": "./src/components/Hamburger/Hamburger.tsx",
-    "./Card": "./src/components/Card/card.tsx"
+    "./Card": "./src/components/Card/card.tsx",
+    "./Toast": "./src/components/Toast/toast.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "react-loader-spinner": "^6.1.6",
-    "react-spinners": "^0.14.1"
+    "react-spinners": "^0.14.1",
+    "sonner": "^2.0.7"
   }
 }

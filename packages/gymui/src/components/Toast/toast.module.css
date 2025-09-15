@@ -1,0 +1,4 @@
+.success, .error {
+  display: flex;
+  gap: 8px;
+}
