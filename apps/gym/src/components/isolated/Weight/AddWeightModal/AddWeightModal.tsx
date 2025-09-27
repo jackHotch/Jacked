@@ -32,6 +32,7 @@ export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
       {
         onSuccess: () => {
           setOpen(false)
+          toast('Entry added', 'success')
         },
         onError: () => {
           toast('Error adding entry', 'error')
