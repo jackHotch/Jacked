@@ -2,7 +2,7 @@ import styles from './toast.module.css'
 import { toast as sonnerToast } from 'sonner'
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
 
-type toastType = 'default' | 'success' | 'error' | 'loading'
+type toastType = 'default' | 'success' | 'error'
 
 export const toast = (message: string, type: toastType = 'default') => {
   switch (type) {

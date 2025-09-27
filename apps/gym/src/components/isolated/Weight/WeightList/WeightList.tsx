@@ -6,6 +6,7 @@ import { useWeight } from '@/hooks/api/useWeight'
 import { Loading } from '@gymapp/gymui/Loading'
 import { Card } from '@gymapp/gymui/Card'
 import { IWeightData } from '@/types'
+import { toast } from '@gymapp/gymui/Toast'
 
 export const WeightList = () => {
   const { data, isLoading } = useWeight()
@@ -13,7 +14,7 @@ export const WeightList = () => {
   if (isLoading == false && data.status == 'success') {
     weight = data.data
   } else {
-    // add toast error message
+    toast('Error fetching weight', 'error')
   }
 
   const reversedIndexes = weight ? [...weight.keys()].reverse() : []

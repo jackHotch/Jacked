@@ -9,6 +9,7 @@ import { CreateNewExerciseModal } from '../CreateNewExerciseModal'
 import { useExercises } from '@/hooks'
 import { Button } from '@gymapp/gymui/Button'
 import { Modal } from '@gymapp/gymui/Modal'
+import { toast } from '@gymapp/gymui/Toast'
 
 export const AddExerciseModal = ({ open, setOpen, workout, setWorkout }: AddExerciseModalProps) => {
   const [newExercises, setNewExercises] = useState<IWorkout[]>([])
@@ -19,7 +20,7 @@ export const AddExerciseModal = ({ open, setOpen, workout, setWorkout }: AddExer
   if (data?.status == 'success') {
     exercises = data.data
   } else {
-    // add toast error message
+    toast('Error fetching exercises', 'error')
   }
 
   const removeExercise = (i: number) => {
