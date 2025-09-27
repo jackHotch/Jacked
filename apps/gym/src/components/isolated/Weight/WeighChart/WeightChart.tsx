@@ -8,10 +8,15 @@ import { WeightChartMobile } from './WeightChartMobile/WeightChartMobile'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import isBetween from 'dayjs/plugin/isBetween'
+import { IWeightData } from '@/types'
 dayjs.extend(isBetween)
 
 export const WeightChart = () => {
   const { data, isLoading } = useWeight()
+  var weights: IWeightData[]
+  if (isLoading == false && data.status == 'success') {
+    weights = data.data
+  }
   const [labels, setLabels] = useState([])
   const [weightData, setWeightData] = useState([])
 
@@ -22,9 +27,9 @@ export const WeightChart = () => {
   }, [data])
 
   const filterByRange = (startDate?: Dayjs, endDate?: Dayjs) => {
-    startDate = startDate ? startDate : dayjs(data[0].date)
-    endDate = endDate ? endDate : dayjs(data[data.length - 1].date)
-    const filteredData = data?.filter((value) => {
+    startDate = startDate ? startDate : dayjs(weights[0].date)
+    endDate = endDate ? endDate : dayjs(weights[weights.length - 1].date)
+    const filteredData = weights?.filter((value) => {
       return dayjs(value.date).isBetween(startDate, endDate, 'day', '[]')
     })
     const [l, d] = getChartData(filteredData)
@@ -39,14 +44,14 @@ export const WeightChart = () => {
         weightData={weightData}
         labels={labels}
         isLoading={isLoading}
-        data={data}
+        data={weights}
       />
       <WeightChartMobile
         filter={filterByRange}
         weightData={weightData}
         labels={labels}
         isLoading={isLoading}
-        data={data}
+        data={weights}
       />
     </LocalizationProvider>
   )
