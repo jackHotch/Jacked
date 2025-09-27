@@ -8,11 +8,9 @@ import { useCreateExercise } from '@/hooks'
 import { Button } from '@gymapp/gymui/Button'
 import { Modal } from '@gymapp/gymui/Modal'
 import { Form } from '@gymapp/gymui/Form'
+import { toast } from '@gymapp/gymui/Toast'
 
-export const CreateNewExerciseModal = ({
-  open,
-  setOpen,
-}: CreateNewExerciseModalProps) => {
+export const CreateNewExerciseModal = ({ open, setOpen }: CreateNewExerciseModalProps) => {
   const [name, setName] = useState('')
   const { mutate: createExercise, data: res } = useCreateExercise()
 
@@ -22,7 +20,7 @@ export const CreateNewExerciseModal = ({
         setOpen(false)
       },
       onError: () => {
-        // show toast error here
+        toast('Error creating a new exercises', 'error')
       },
     })
   }
@@ -44,11 +42,7 @@ export const CreateNewExerciseModal = ({
         </Modal.Header>
         <div>
           <label className={styles.label}>New Exercise Name</label>
-          <Form.Text.Outline
-            placeholder='ex: Bicep Curls'
-            value={name}
-            onChange={(e) => handleChange(e)}
-          />
+          <Form.Text.Outline placeholder='ex: Bicep Curls' value={name} onChange={(e) => handleChange(e)} />
         </div>
         <Modal.Footer>
           <Button.Primary type='button' onClick={handleSubmit}>

@@ -13,6 +13,7 @@ import { Modal } from '@gymapp/gymui/Modal'
 import { Form } from '@gymapp/gymui/Form'
 import { DatePicker } from '@/components/reusable'
 import AddIcon from '@mui/icons-material/Add'
+import { toast } from '@gymapp/gymui/Toast'
 
 export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
   const [weight, setWeight] = useState('')
@@ -33,7 +34,7 @@ export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
           setOpen(false)
         },
         onError: () => {
-          // show toast error here
+          toast('Error adding entry', 'error')
         },
       }
     )
@@ -45,11 +46,7 @@ export const AddWeightModal = ({ open, setOpen }: AddWeightModalProps) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Modal
-        open={open}
-        onOpenChange={setOpen}
-        sx={{ width: isMobile ? '50%' : 'unset' }}
-      >
+      <Modal open={open} onOpenChange={setOpen} sx={{ width: isMobile ? '50%' : 'unset' }}>
         <Modal.Trigger>
           <Button.Primary sx={{ width: isMobile ? '100%' : 'unset' }}>
             Add

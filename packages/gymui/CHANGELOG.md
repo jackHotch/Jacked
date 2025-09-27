@@ -2,6 +2,10 @@
 
 _This is the changelog for GymUI_
 
+## 9/27/2025 - 13.0.1
+
+- Finished the toast component
+
 ## 5/5/2025 - 12.0.1
 
 - Refactored modal component

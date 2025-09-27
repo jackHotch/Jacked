@@ -3,6 +3,7 @@ import { WeightListEntryProps } from '@/types'
 import { EntryPopover } from '../../EntryPopover'
 import { useToggle } from '@/hooks'
 import { useDeleteWeight } from '@/hooks'
+import { toast } from '@gymapp/gymui/Toast'
 
 export const WeightListEntry = ({ value, id, difference }: WeightListEntryProps) => {
   const [showEntryPopover, setShowEntryPopover, , closeEntryPopover] = useToggle()
@@ -14,7 +15,7 @@ export const WeightListEntry = ({ value, id, difference }: WeightListEntryProps)
         closeEntryPopover()
       },
       onError: () => {
-        // show toast error here
+        toast('Error deleting weight', 'error')
       },
     })
   }
@@ -34,11 +35,7 @@ export const WeightListEntry = ({ value, id, difference }: WeightListEntryProps)
           {difference}
         </span>
         <span className={styles.date}>{value.date}</span>
-        <EntryPopover
-          open={showEntryPopover}
-          setOpen={setShowEntryPopover}
-          deleteEntry={deleteEntry}
-        />
+        <EntryPopover open={showEntryPopover} setOpen={setShowEntryPopover} deleteEntry={deleteEntry} />
       </div>
     </div>
   )
