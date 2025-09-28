@@ -1,10 +1,10 @@
-import { getCurrentSplit } from '@/actions/splits'
+import { getCurrentSplitName } from '@/actions/splits'
 import { useQuery } from '@tanstack/react-query'
 
-export const useCurrentSplit = () => {
+export const useCurrentSplitName = () => {
   const response = useQuery({
     queryKey: ['currentSplit'],
-    queryFn: () => getCurrentSplit(),
+    queryFn: () => getCurrentSplitName(),
   })
   const isEmpty = !response.isLoading && !response.data
   return { ...response, isEmpty }

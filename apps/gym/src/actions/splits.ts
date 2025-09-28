@@ -5,9 +5,9 @@ import axios from 'axios'
 
 const URL = process.env.URL + '/' + process.env.API_VERSION + '/splits'
 
-export const getCurrentSplit = async () => {
+export const getCurrentSplitName = async () => {
   const userId = await getSupabaseUserId()
-  const { data } = await axios.get(`${URL}/current`, {
+  const { data } = await axios.get(`${URL}/current/name`, {
     params: {
       userId: userId,
     },
