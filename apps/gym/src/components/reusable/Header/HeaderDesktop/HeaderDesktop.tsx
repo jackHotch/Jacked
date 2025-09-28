@@ -3,14 +3,22 @@
 import styles from './HeaderDesktop.module.css'
 import { HeaderDesktopProps } from '@/types'
 import { useCurrentWeight } from '@/hooks/api/useCurrentWeight'
-import { useCurrentSplit } from '@/hooks/api/useCurrentSplit'
+import { useCurrentSplitName } from '@/hooks/api/useCurrentSplitName'
 import Link from 'next/link'
 import { Button } from '@gymapp/gymui/Button'
 import ClipLoader from 'react-spinners/ClipLoader'
 
 export const HeaderDesktop = ({}: HeaderDesktopProps) => {
-  const { data: currentWeight, isLoading: isWeightLoading, isEmpty: isWeightEmpty } = useCurrentWeight()
-  const { data: currentSplit, isLoading: isSplitLoading, isEmpty: isSplitEmpty } = useCurrentSplit()
+  const {
+    data: currentWeight,
+    isLoading: isWeightLoading,
+    isEmpty: isWeightEmpty,
+  } = useCurrentWeight()
+  const {
+    data: currentSplit,
+    isLoading: isSplitLoading,
+    isEmpty: isSplitEmpty,
+  } = useCurrentSplitName()
 
   return (
     <div className={styles.container}>
@@ -19,7 +27,9 @@ export const HeaderDesktop = ({}: HeaderDesktopProps) => {
           <ClipLoader size={10} />
         ) : isWeightEmpty ? (
           <Link href='/weight'>
-            <Button.Text sx={{ display: 'inline' }}>Start tracking your weight</Button.Text>
+            <Button.Text sx={{ display: 'inline' }}>
+              Start tracking your weight
+            </Button.Text>
           </Link>
         ) : (
           <span>{currentWeight?.data.weight} lbs</span>

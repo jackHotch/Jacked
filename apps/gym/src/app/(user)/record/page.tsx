@@ -2,12 +2,12 @@
 
 import styles from './Record.module.css'
 import Link from 'next/link'
-import { useCurrentSplit } from '@/hooks/api/useCurrentSplit'
+import { useCurrentSplitName } from '@/hooks/api/useCurrentSplitName'
 import { Loading } from '@gymapp/gymui/Loading'
 import { Button } from '@gymapp/gymui/Button'
 
 const Record = () => {
-  const { data: currentSplit, isLoading, isEmpty } = useCurrentSplit()
+  const { data: currentSplit, isLoading, isEmpty } = useCurrentSplitName()
 
   return (
     <div className={styles.container}>
