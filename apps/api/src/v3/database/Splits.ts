@@ -16,7 +16,7 @@ export async function getAllSplits(userId: string) {
   try {
     const splits = await client.query(
       `
-      SELECT split_id, user_id, name, active, days_per_week FROM splits WHERE user_id = $1`,
+      SELECT split_id, user_id, name, is_active, description, last_used_at FROM splits WHERE user_id = $1`,
       [userId]
     )
 
