@@ -14,3 +14,13 @@ export const getCurrentSplitName = async () => {
   })
   return data
 }
+
+export const getAllSplitsSummary = async () => {
+  const userId = await getSupabaseUserId()
+  const { data } = await axios.get(`${URL}/summary`, {
+    params: {
+      userId: userId,
+    },
+  })
+  return data
+}
