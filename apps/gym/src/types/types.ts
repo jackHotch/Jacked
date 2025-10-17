@@ -43,7 +43,7 @@ export interface ChartProps {
   height?: string
 }
 
-export interface SearchbarProps {
+export interface RecordSearchbarProps {
   placeholder: string
   data: IExercises[] | undefined
   newExercise: IWorkout[]
@@ -234,4 +234,8 @@ export interface DifferenceCardProps {
   difference: string
   gainedWeight: boolean
   isEmpty: boolean
+}
+
+export interface SplitSearchbarProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  splits?: any
 }
