@@ -237,5 +237,5 @@ export interface DifferenceCardProps {
 }
 
 export interface SplitSearchbarProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  splits?: any
+  splits?: any[]
 }
