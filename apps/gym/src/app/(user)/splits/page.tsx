@@ -9,7 +9,7 @@ const Splits = () => {
   return (
     <div>
       <div>
-        <Searchbar splits={data} />
+        <Searchbar splits={data?.data} />
       </div>
     </div>
   )

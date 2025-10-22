@@ -2,6 +2,10 @@
 
 _This is the changelog for the entire project_
 
+## 10/21/2025
+
+- Updated splits api
+
 ## 5/5/2025
 
 - Refactored project to use new modal, popover, and card components
