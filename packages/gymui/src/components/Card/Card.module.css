@@ -6,7 +6,7 @@
   border-radius: 16px;
   width: max-content;
   align-items: center;
-  padding: 24px;
+  padding: 22px;
   position: relative;
   gap: 32px;
   min-width: 350px;
@@ -45,7 +45,7 @@
 
 @media (width < 480px) {
   .card_container {
-    width: 100%;
+    width: calc(100%-44px);
   }
 }
 

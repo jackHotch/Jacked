@@ -77,23 +77,29 @@ export async function getAllSplitsSummary(userId: string) {
   try {
     const allSplitsSummary = await client.query(
       `
-      SELECT 
+      SELECT
         s.name,
-        s.description, 
-        s.is_active, 
-        s.last_used_at, 
+        s.description,
+        s.is_active,
+        s.last_used_at,
         s.created_at,
         COUNT(DISTINCT st.split_template_id) as total_template_days,
         COUNT(DISTINCT ste.split_template_exercise_id) as total_template_exercises,
         COUNT(DISTINCT w.workout_id) as total_workouts_completed,
         COUNT(DISTINCT ws.workout_set_id) as total_sets_logged,
-        CASE 
+        CASE
           WHEN s.last_used_at IS NULL THEN 'Never used'
           WHEN s.last_used_at::date = CURRENT_DATE THEN 'Today'
           WHEN s.last_used_at::date = CURRENT_DATE - 1 THEN '1 day ago'
-          WHEN s.last_used_at::date > CURRENT_DATE - 7 THEN (CURRENT_DATE - s.last_used_at::date) || ' days ago'
-          WHEN s.last_used_at::date > CURRENT_DATE - 30 THEN ((CURRENT_DATE - s.last_used_at::date) / 7) || ' weeks ago'
-          ELSE ((CURRENT_DATE - s.last_used_at::date) / 30) || ' months ago'
+          WHEN s.last_used_at::date > CURRENT_DATE - 7 THEN 
+            (CURRENT_DATE - s.last_used_at::date) || 
+            CASE WHEN (CURRENT_DATE - s.last_used_at::date) = 1 THEN ' day ago' ELSE ' days ago' END
+          WHEN s.last_used_at::date > CURRENT_DATE - 30 THEN 
+            ((CURRENT_DATE - s.last_used_at::date) / 7) || 
+            CASE WHEN ((CURRENT_DATE - s.last_used_at::date) / 7) = 1 THEN ' week ago' ELSE ' weeks ago' END
+          ELSE 
+            ((CURRENT_DATE - s.last_used_at::date) / 30) || 
+            CASE WHEN ((CURRENT_DATE - s.last_used_at::date) / 30) = 1 THEN ' month ago' ELSE ' months ago' END
         END as last_used_display
       FROM splits s
       LEFT JOIN split_templates st ON s.split_id = st.split_id
