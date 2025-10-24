@@ -236,6 +236,23 @@ export interface DifferenceCardProps {
   isEmpty: boolean
 }
 
+export interface Split {
+  name: string
+  description: string
+  is_active: 0 | 1
+  last_used_at: string
+  created_at: string
+  total_template_days: string
+  total_template_exercises: string
+  total_workouts_completed: string
+  total_sets_logged: string
+  last_used_display: string
+}
+
 export interface SplitSearchbarProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  splits?: any[]
+  filterSplits: (a: string) => void
+}
+
+export interface SplitCardProps {
+  split: Split
 }
