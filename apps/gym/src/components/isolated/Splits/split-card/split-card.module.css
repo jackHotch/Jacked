@@ -1,23 +1,29 @@
 .container {
-  margin: 12px 0;
   cursor: pointer;
-  width: min-content;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  border-radius: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  width: 100%;
+  /* width: calc(100% - 44px); */
 }
 
 .active_split {
-  box-shadow: 0 10px 30px var(--success-faded), 0 4px 6px var(--success-faded);
+  border: 2px solid var(--success)
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .name {
-  /* display: flex;
-  align-items: center;
-  gap: 8px; */
   font-size: 20px;
   font-weight: 800;
 }
@@ -40,5 +46,59 @@
   align-items: center;
   justify-content: space-between;
   font-size: 12px;
-  color: var(--dark-gray)
+  color: var(--dark-gray);
 }
+
+.footer {
+  width: 100%;
+}
+
+.days_per_week, .total_workouts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+}
+
+.split_attributes {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    width: calc(50% - 0.75rem); /* 50% minus half the gap */
+  }
+}
+
+/* Card - Large tablets and up (3 per row) */
+@media (min-width: 1024px) {
+  .container {
+    width: calc(33.333% - 1rem); /* 33.333% minus 2/3 of the gap */
+  }
+}
+
+/* Card - Desktop (4 per row) */
+@media (min-width: 1280px) {
+  .container {
+    width: calc(25% - 1.125rem); /* 25% minus 3/4 of the gap */
+  }
+}
+
+/* Card - Extra Large Desktop (5 per row) */
+@media (min-width: 1536px) {
+  .container {
+    width: calc(20% - 1.2rem); /* 20% minus 4/5 of the gap */
+  }
+}
+
+/* @media (width > 990px) {
+  .container {
+    width: 400px;
+    max-width: 400px;
+    flex-grow: 1;
+  }
+} */
+
+
