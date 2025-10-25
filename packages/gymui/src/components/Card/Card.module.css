@@ -9,7 +9,7 @@
   padding: 22px;
   position: relative;
   gap: 32px;
-  min-width: 350px;
+  min-width: 400px;
 }
 
 .header_container {
@@ -43,9 +43,10 @@
   gap: 8px;
 }
 
-@media (width < 480px) {
+@media (width < 600px) {
   .card_container {
-    width: calc(100%-44px);
+    /* width: calc(100% - 44px); */
+    min-width: 100%;
   }
 }
 

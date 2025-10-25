@@ -26,9 +26,11 @@ const Splits = () => {
   return (
     <>
       <Searchbar filterSplits={filterSplits} />
-      {filteredData?.map((split: Split, key: number) => {
-        return <SplitCard split={split} key={key} />
-      })}
+      <div className={styles.split_card_list}>
+        {filteredData?.map((split: Split, key: number) => {
+          return <SplitCard split={split} key={key} />
+        })}
+      </div>
     </>
   )
 }
