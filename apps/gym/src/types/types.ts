@@ -237,6 +237,7 @@ export interface DifferenceCardProps {
 }
 
 export interface Split {
+  split_id: number
   name: string
   description: string
   is_active: 0 | 1

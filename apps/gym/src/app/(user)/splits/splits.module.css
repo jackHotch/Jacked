@@ -1,13 +1,12 @@
-.heading {
+.header {
   display: flex;
-  justify-content: center;
-  align-items: centers;
+  gap: 8px;
 }
 
 .split_card_list {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-top: 8px;
+  margin-top: 32px;
 }
 

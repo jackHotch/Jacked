@@ -78,6 +78,7 @@ export async function getAllSplitsSummary(userId: string) {
     const allSplitsSummary = await client.query(
       `
       SELECT
+        s.split_id,
         s.name,
         s.description,
         s.is_active,
