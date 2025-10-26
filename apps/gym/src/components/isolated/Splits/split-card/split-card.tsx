@@ -5,14 +5,17 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'
 import dayjs from 'dayjs'
 import { motion } from 'motion/react'
+import { useRouter } from 'next/navigation'
 
 export const SplitCard = ({ split }: SplitCardProps) => {
   const createdAtDisplay = dayjs(split.created_at).format('MMM D, YYYY')
+  const router = useRouter()
 
   return (
     <motion.div
       className={`${styles.container} ${split.is_active ? styles.active_split : null}`}
       whileHover={{ scale: 1.02 }}
+      onClick={() => router.push(`/splits/${split.split_id}`)}
     >
       <div className={styles.header}>
         <span className={styles.name}>
