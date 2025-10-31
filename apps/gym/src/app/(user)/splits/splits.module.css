@@ -4,9 +4,37 @@
 }
 
 .split_card_list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
   margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column on mobile */
+  gap: 1.5rem; /* 24px */
+}
+
+/* Small tablets and up (2 columns) */
+@media (min-width: 640px) {
+  .split_card_list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Large tablets and up (3 columns) */
+@media (min-width: 1024px) {
+  .split_card_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop (4 columns) */
+@media (min-width: 1280px) {
+  .split_card_list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra Large Desktop (5 columns) */
+@media (min-width: 1536px) {
+  .split_card_list {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
