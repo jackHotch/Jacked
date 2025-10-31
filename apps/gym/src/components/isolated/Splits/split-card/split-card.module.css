@@ -8,7 +8,7 @@
   align-items: center;
   gap: 16px;
   padding: 22px;
-  width: 100%;
+  /* width: 100%; */
   /* width: calc(100% - 44px); */
 }
 
@@ -65,40 +65,3 @@
   justify-content: space-around;
   width: 100%;
 }
-
-@media (min-width: 640px) {
-  .container {
-    width: calc(50% - 0.75rem); /* 50% minus half the gap */
-  }
-}
-
-/* Card - Large tablets and up (3 per row) */
-@media (min-width: 1024px) {
-  .container {
-    width: calc(33.333% - 1rem); /* 33.333% minus 2/3 of the gap */
-  }
-}
-
-/* Card - Desktop (4 per row) */
-@media (min-width: 1280px) {
-  .container {
-    width: calc(25% - 1.125rem); /* 25% minus 3/4 of the gap */
-  }
-}
-
-/* Card - Extra Large Desktop (5 per row) */
-@media (min-width: 1536px) {
-  .container {
-    width: calc(20% - 1.2rem); /* 20% minus 4/5 of the gap */
-  }
-}
-
-/* @media (width > 990px) {
-  .container {
-    width: 400px;
-    max-width: 400px;
-    flex-grow: 1;
-  }
-} */
-
-
