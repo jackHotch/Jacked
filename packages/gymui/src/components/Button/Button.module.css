@@ -5,6 +5,7 @@
   align-items: center;
   border: none;
   cursor: pointer;
+  gap: 4px;
 }
 
 .primary {

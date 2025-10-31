@@ -1,0 +1,67 @@
+.container {
+  cursor: pointer;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  border-radius: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  /* width: 100%; */
+  /* width: calc(100% - 44px); */
+}
+
+.active_split {
+  border: 2px solid var(--success)
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.active_tag {
+  color: var(--success);
+  font-size: 12px;
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+.hr {
+  border: none;
+  height: 1px;
+  background-color: var(--dark-gray);
+}
+
+.footer_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--dark-gray);
+}
+
+.footer {
+  width: 100%;
+}
+
+.days_per_week, .total_workouts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+}
+
+.split_attributes {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
