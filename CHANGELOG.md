@@ -2,6 +2,10 @@
 
 _This is the changelog for the entire project_
 
+## 11/2/2025
+
+- Created splits dashboard
+
 ## 10/21/2025
 
 - Updated splits api
