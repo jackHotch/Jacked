@@ -1,4 +1,4 @@
-import { pool } from '../../db'
+import { pool } from '../../config/db'
 import dotenv from 'dotenv'
 import { IExercises } from '../../globals'
 
@@ -6,10 +6,7 @@ dotenv.config()
 
 export async function getCurrentWorkoutNumber(userId: string) {
   const client = await pool.connect()
-  const { rows } = await client.query(
-    'SELECT COUNT(*)::int FROM workouts WHERE user_id = $1',
-    [userId]
-  )
+  const { rows } = await client.query('SELECT COUNT(*)::int FROM workouts WHERE user_id = $1', [userId])
   client.release()
   return rows
 }

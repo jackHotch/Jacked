@@ -1,6 +1,9 @@
-import { pool } from '../../db'
+import { pool } from '../../config/db'
 import dotenv from 'dotenv'
 import { formatResponse } from '../../utils/utils'
+import cache from '../../services/cache'
+import { PoolClient } from 'pg'
+import { redis } from '../../config/redis'
 dotenv.config()
 
 export async function cronjob() {
@@ -66,15 +69,25 @@ export async function getCurrentSplitId(userId: string) {
     return formatResponse(200, { data: currentSplitId.rows[0] })
   } catch (err) {
     console.error('Error in GET /splits/current/id')
+    return formatResponse(500)
   } finally {
     client.release()
   }
 }
 
 export async function getAllSplitsSummary(userId: string) {
-  const client = await pool.connect()
+  let client: PoolClient
 
   try {
+    const redisKey = `splits:${userId}:summary`
+    const cachedAllSplitSummary = await redis.json.get(redisKey)
+
+    if (cachedAllSplitSummary) {
+      console.log('cache hit!!!!')
+      return formatResponse(200, { data: cachedAllSplitSummary })
+    }
+
+    client = await pool.connect()
     const allSplitsSummary = await client.query(
       `
       SELECT
@@ -117,10 +130,14 @@ export async function getAllSplitsSummary(userId: string) {
       return formatResponse(404, { message: 'No splits found' })
     }
 
+    await redis.json.set(redisKey, '$', allSplitsSummary.rows)
     return formatResponse(200, { data: allSplitsSummary.rows })
   } catch (err) {
     console.error('Error in GET /splits/summary')
+    return formatResponse(500)
   } finally {
-    client.release()
+    if (client) {
+      client.release()
+    }
   }
 }

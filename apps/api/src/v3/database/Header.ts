@@ -1,4 +1,4 @@
-import { pool } from '../../db'
+import { pool } from '../../config/db'
 import dotenv from 'dotenv'
 import { formatResponse } from '../../utils/utils'
 dotenv.config()
