@@ -1,4 +1,4 @@
-import { pool } from '../../db'
+import { pool } from '../../config/db'
 import dotenv from 'dotenv'
 import { formatResponse } from '../../utils/utils'
 dotenv.config()
@@ -46,10 +46,7 @@ export async function insertExercise(userId: string, name: string) {
       return formatResponse(400, { message: 'Exercise already exists' })
     }
 
-    const result = await client.query(
-      `INSERT INTO exercises (name, user_id) VALUES ($1, $2)`,
-      [name, userId]
-    )
+    const result = await client.query(`INSERT INTO exercises (name, user_id) VALUES ($1, $2)`, [name, userId])
 
     if (result.rowCount !== 1) {
       return formatResponse(422, { message: 'Failed to insert exercise' })

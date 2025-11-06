@@ -1,6 +1,9 @@
-import { pool } from '../../db'
+import { pool } from '../../config/db'
 import dotenv from 'dotenv'
 import { formatResponse } from '../../utils/utils'
+import { PoolClient } from 'pg'
+import { getCache, redis, setCache } from '../../config/redis'
+import { getAllSplitsSummaryKey } from '../cache/Splits'
 dotenv.config()
 
 export async function cronjob() {
@@ -8,28 +11,6 @@ export async function cronjob() {
   const { rows } = await client.query(`SELECT * FROM splits`)
   client.release()
   return rows
-}
-
-export async function getAllSplits(userId: string) {
-  const client = await pool.connect()
-
-  try {
-    const splits = await client.query(
-      `SELECT split_id, user_id, name, is_active, description, last_used_at FROM splits WHERE user_id = $1`,
-      [userId]
-    )
-
-    if (splits.rowCount === 0) {
-      return formatResponse(404, { message: 'No splits found' })
-    }
-
-    return formatResponse(200, { data: splits.rows })
-  } catch (err) {
-    console.error('Error in GET /splits:', err)
-    return formatResponse(500)
-  } finally {
-    client.release()
-  }
 }
 
 export async function getCurrentSplitName(userId: string) {
@@ -66,15 +47,25 @@ export async function getCurrentSplitId(userId: string) {
     return formatResponse(200, { data: currentSplitId.rows[0] })
   } catch (err) {
     console.error('Error in GET /splits/current/id')
+    return formatResponse(500)
   } finally {
     client.release()
   }
 }
 
 export async function getAllSplitsSummary(userId: string) {
-  const client = await pool.connect()
+  let client: PoolClient
 
   try {
+    const redisKey = getAllSplitsSummaryKey(userId)
+    const cachedAllSplitSummary = await getCache(redisKey)
+
+    if (cachedAllSplitSummary) {
+      console.log('cache hit!!!!')
+      return formatResponse(200, { data: cachedAllSplitSummary })
+    }
+
+    client = await pool.connect()
     const allSplitsSummary = await client.query(
       `
       SELECT
@@ -117,10 +108,14 @@ export async function getAllSplitsSummary(userId: string) {
       return formatResponse(404, { message: 'No splits found' })
     }
 
+    await setCache(redisKey, allSplitsSummary.rows, 60 * 60 * 24 * 14)
     return formatResponse(200, { data: allSplitsSummary.rows })
   } catch (err) {
     console.error('Error in GET /splits/summary')
+    return formatResponse(500)
   } finally {
-    client.release()
+    if (client) {
+      client.release()
+    }
   }
 }
