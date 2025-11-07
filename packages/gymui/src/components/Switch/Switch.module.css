@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle_container {
+  display: flex;
+  align-items: center;
+  border-radius: 999999999px;
+  width: 42px;
+  height: 22px;
+  background-color: var(--faded-gray);
+  justify-content: flex-start;
+  padding: 2px;
+}
+
+.toggle_circle {
+  background-color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.toggle_container[data-is-on="true"] {
+  justify-content: flex-end;
+}
