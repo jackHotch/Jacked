@@ -2,6 +2,10 @@
 
 _This is the changelog for GymUI_
 
+## 11/06/2025 - 14.0.1
+
+- Finished switch component
+
 ## 9/27/2025 - 13.0.1
 
 - Finished the toast component
