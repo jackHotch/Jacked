@@ -4,20 +4,21 @@ import { motion } from 'motion/react'
 
 interface SwitchProps {
   label: string
+  onValueChange?: (a: boolean) => void
   defaultValue?: boolean
   sx?: CSSProperties
 }
 
-export const Switch = ({ label, defaultValue = false, sx, ...props }: SwitchProps) => {
+export const Switch = ({ label, onValueChange, defaultValue = false, sx, ...props }: SwitchProps) => {
   const [checked, setChecked] = useState(false)
 
   const handleClick = () => {
     setChecked(!checked)
+    // onValueChange
   }
 
   return (
     <div className={styles.container} {...props}>
-      <label>{label}</label>
       <div className={styles.toggle_container} data-is-on={checked} onClick={handleClick}>
         <motion.div
           layout
@@ -25,6 +26,7 @@ export const Switch = ({ label, defaultValue = false, sx, ...props }: SwitchProp
           transition={{ type: 'spring', stiffness: 700, damping: 32 }}
         ></motion.div>
       </div>
+      <label>{label}</label>
     </div>
   )
 }

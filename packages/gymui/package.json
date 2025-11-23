@@ -14,7 +14,8 @@
     "./Error": "./src/components/Error/Error.tsx",
     "./Hamburger": "./src/components/Hamburger/Hamburger.tsx",
     "./Card": "./src/components/Card/card.tsx",
-    "./Toast": "./src/components/Toast/toast.tsx"
+    "./Toast": "./src/components/Toast/toast.tsx",
+    "./Switch": "./src/components/Switch/Switch.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
