@@ -4,6 +4,7 @@ import List from '@mui/icons-material/FormatListBulletedOutlined'
 import Barbell from '@mui/icons-material/FitnessCenterOutlined'
 import Scale from '@mui/icons-material/MonitorWeightOutlined'
 import TrendingUp from '@mui/icons-material/MovingOutlined'
+import CodeIcon from '@mui/icons-material/Code'
 import dayjs from 'dayjs'
 import { z } from 'zod'
 
@@ -39,6 +40,11 @@ export const DESKTOP_NAV_OPTIONS = [
     path: '/progress',
     icon: <TrendingUp />,
   },
+  {
+    name: 'Development',
+    path: '/development',
+    icon: <CodeIcon />,
+  },
 ]
 
 export const MOBILE_NAV_OPTIONS = [
@@ -73,6 +79,11 @@ export const MOBILE_NAV_OPTIONS = [
     path: '/progress',
     icon: <TrendingUp sx={{ fontSize: 60, color: 'white' }} />,
   },
+  {
+    name: 'Development',
+    path: '/development',
+    icon: <CodeIcon sx={{ fontSize: 60, color: 'white' }} />,
+  },
 ]
 
 export const RangeSelectorOptions = [
@@ -86,13 +97,7 @@ export const RangeSelectorOptions = [
   { name: 'Custom' },
 ]
 
-export const unauthorizedUrls = [
-  '/',
-  '/login',
-  '/signup',
-  'forgot-password',
-  'reset-password',
-]
+export const unauthorizedUrls = ['/', '/login', '/signup', 'forgot-password', 'reset-password']
 
 export const emailSchema = z
   .string({ required_error: 'Email is required' })
