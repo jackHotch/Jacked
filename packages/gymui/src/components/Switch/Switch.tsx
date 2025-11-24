@@ -4,17 +4,19 @@ import { motion } from 'motion/react'
 
 interface SwitchProps {
   label: string
-  onValueChange?: (a: boolean) => void
+  onValueChange?: (a: string, b: boolean) => void
+  settingsKey?: string
   defaultValue?: boolean
   sx?: CSSProperties
 }
 
-export const Switch = ({ label, onValueChange, defaultValue = false, sx, ...props }: SwitchProps) => {
+export const Switch = ({ label, onValueChange, settingsKey, defaultValue = false, sx, ...props }: SwitchProps) => {
   const [checked, setChecked] = useState(false)
 
   const handleClick = () => {
-    setChecked(!checked)
-    // onValueChange
+    const newValue = !checked
+    setChecked(newValue)
+    onValueChange(settingsKey, newValue)
   }
 
   return (

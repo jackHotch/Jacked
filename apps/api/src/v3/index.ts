@@ -9,10 +9,7 @@ v3Router.use(express.json())
 v3Router.use(userIdMiddleware)
 v3Router.use(
   cors({
-    origin: [
-      'https://jackhotchkiss-jacked.vercel.app',
-      'https://jackhotchkiss-gym-app.vercel.app',
-    ],
+    origin: ['https://jackhotchkiss-jacked.vercel.app', 'https://jackhotchkiss-gym-app.vercel.app'],
   })
 )
 
@@ -32,5 +29,8 @@ v3Router.use(`/weights`, weightsRouter)
 
 import workoutsRouter from './routes/Workouts'
 v3Router.use(`/workouts`, workoutsRouter)
+
+import developmentRouter from './routes/Development'
+v3Router.use(`/development`, developmentRouter)
 
 export default v3Router

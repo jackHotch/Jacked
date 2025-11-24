@@ -10,7 +10,8 @@ const Development = () => {
   const [updatedsettings, setUpdatedSettings] = useState({})
   const [isDirty, setIsDirty] = useState(false)
 
-  const handleChange = (newValue) => {
+  const handleChange = (key, newValue) => {
+    setUpdatedSettings((prev) => ({ ...prev, [key]: newValue }))
     setIsDirty(true)
   }
 
@@ -23,7 +24,7 @@ const Development = () => {
         <h4>Caching:</h4>
         <ul>
           <li>
-            <Switch onValueChange={handleChange} label='Caching enabled' />
+            <Switch onValueChange={handleChange} settingsKey='' label='Caching enabled' />
           </li>
         </ul>
       </div>
