@@ -13,7 +13,7 @@ export async function getDevSettings(userId: string) {
       return formatResponse(404, { message: 'No settings found' })
     }
 
-    return formatResponse(200, { data: settings.rows })
+    return formatResponse(200, { data: settings.rows[0] })
   } catch (err) {
     console.error('Error in GET /development/settings:', err)
     return formatResponse(500)

@@ -1,4 +1,4 @@
-import { CSSProperties, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import styles from './Switch.module.css'
 import { motion } from 'motion/react'
 
@@ -11,7 +11,11 @@ interface SwitchProps {
 }
 
 export const Switch = ({ label, onValueChange, settingsKey, defaultValue = false, sx, ...props }: SwitchProps) => {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(defaultValue)
+
+  useEffect(() => {
+    setChecked(defaultValue)
+  }, [defaultValue])
 
   const handleClick = () => {
     const newValue = !checked
