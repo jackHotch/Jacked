@@ -22,8 +22,15 @@ const Development = () => {
   }, [data])
 
   const handleChange = (key, newValue) => {
-    setUpdatedSettings((prev) => ({ ...prev, [key]: newValue }))
-    setIsDirty(true)
+    setUpdatedSettings((prev) => {
+      const updated = { ...prev, [key]: newValue }
+
+      // Check if settings match original
+      const hasChanges = Object.keys(updated).some((k) => updated[k] !== originalSettings[k])
+
+      setIsDirty(hasChanges)
+      return updated
+    })
   }
 
   if (isLoading || !updatedSettings) {
@@ -43,13 +50,13 @@ const Development = () => {
               onValueChange={handleChange}
               settingsKey='is_caching_enabled'
               label='Caching enabled'
-              defaultValue={updatedSettings.is_caching_enabled === 1}
+              defaultValue={updatedSettings.is_caching_enabled === true}
             />
           </li>
         </ul>
       </div>
 
-      <Button.Primary>Save</Button.Primary>
+      {isDirty ? <Button.Primary>Save</Button.Primary> : <Button.Disabled>Save</Button.Disabled>}
     </div>
   )
 }
