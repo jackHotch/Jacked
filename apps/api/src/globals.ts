@@ -29,3 +29,7 @@ export interface loginFormData {
   email: string
   password: string
 }
+
+export interface IDevSettings {
+  is_caching_enabled: boolean
+}
