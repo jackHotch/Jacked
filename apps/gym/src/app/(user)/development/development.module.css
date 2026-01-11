@@ -1,3 +1,26 @@
 .container {
-  
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+}
+
+.settings_list {
+  list-style-type: none;
+  margin-left: 16px;
+}
+
+.settings_section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
