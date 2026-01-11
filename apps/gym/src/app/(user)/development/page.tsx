@@ -5,10 +5,13 @@ import styles from './development.module.css'
 import { Switch } from '@gymapp/gymui/Switch'
 import { Button } from '@gymapp/gymui/Button'
 import { useDevelopmentSettings } from '@/hooks/api/useDevelopmentSettings'
+import { useSetDevelopmentSettings } from '@/hooks/api/useSetDevelopmentSettings'
+import { toast } from '@gymapp/gymui/Toast'
+import { FormEvent } from '@/types'
 
 const Development = () => {
-  // get dev settings
   const { data, isLoading } = useDevelopmentSettings()
+  const { mutate: updateDevSettings } = useSetDevelopmentSettings()
   const [originalSettings, setOriginalSettings] = useState(null)
   const [updatedSettings, setUpdatedSettings] = useState(null)
   const [isDirty, setIsDirty] = useState(false)
@@ -25,7 +28,6 @@ const Development = () => {
     setUpdatedSettings((prev) => {
       const updated = { ...prev, [key]: newValue }
 
-      // Check if settings match original
       const hasChanges = Object.keys(updated).some((k) => updated[k] !== originalSettings[k])
 
       setIsDirty(hasChanges)
@@ -33,14 +35,26 @@ const Development = () => {
     })
   }
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    updateDevSettings(updatedSettings, {
+      onSuccess: () => {
+        toast('Dev settings updated', 'success')
+      },
+      onError: () => {
+        toast('Error updated dev settings', 'error')
+      },
+    })
+    setIsDirty(false)
+  }
+
   if (isLoading || !updatedSettings) {
     return <div>Loading...</div>
   }
 
   return (
-    <div className={styles.container}>
-      <h2>Development Options</h2>
-      <hr />
+    <form className={styles.container} onSubmit={handleSubmit}>
+      <h2>Development Settings</h2>
 
       <div>
         <h4>Caching:</h4>
@@ -50,14 +64,14 @@ const Development = () => {
               onValueChange={handleChange}
               settingsKey='is_caching_enabled'
               label='Caching enabled'
-              defaultValue={updatedSettings.is_caching_enabled === true}
+              defaultValue={updatedSettings?.is_caching_enabled === true}
             />
           </li>
         </ul>
       </div>
 
-      {isDirty ? <Button.Primary>Save</Button.Primary> : <Button.Disabled>Save</Button.Disabled>}
-    </div>
+      {isDirty ? <Button.Primary type='submit'>Save</Button.Primary> : <Button.Disabled>Save</Button.Disabled>}
+    </form>
   )
 }
 
