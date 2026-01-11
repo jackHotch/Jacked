@@ -8,6 +8,8 @@ import { useDevelopmentSettings } from '@/hooks/api/useDevelopmentSettings'
 import { useSetDevelopmentSettings } from '@/hooks/api/useSetDevelopmentSettings'
 import { toast } from '@gymapp/gymui/Toast'
 import { FormEvent } from '@/types'
+import { Caching } from '@/components/isolated/Development/Caching/Caching'
+import { UpdateDatabase } from '@/components/isolated/Development/UpdateDatabase/UpdateDatabase'
 
 const Development = () => {
   const { data, isLoading } = useDevelopmentSettings()
@@ -24,7 +26,7 @@ const Development = () => {
     }
   }, [data])
 
-  const handleChange = (key, newValue) => {
+  const handleChange = (key: string, newValue: any) => {
     setUpdatedSettings((prev) => {
       const updated = { ...prev, [key]: newValue }
 
@@ -56,19 +58,9 @@ const Development = () => {
     <form className={styles.container} onSubmit={handleSubmit}>
       <h2>Development Settings</h2>
 
-      <div className={styles.settings_section}>
-        <h4>Caching:</h4>
-        <ul className={styles.settings_list}>
-          <li>
-            <Switch
-              onValueChange={handleChange}
-              settingsKey='is_caching_enabled'
-              label='Caching enabled'
-              defaultValue={updatedSettings?.is_caching_enabled === true}
-            />
-          </li>
-        </ul>
-      </div>
+      <UpdateDatabase />
+
+      <Caching handleChange={handleChange} updatedSettings={updatedSettings} />
 
       <div className={styles.footer}>
         <Button.Secondary>Cancel</Button.Secondary>

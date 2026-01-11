@@ -261,3 +261,8 @@ export interface SplitCardProps {
 export interface IDevSettings {
   is_caching_enabled: boolean
 }
+
+export interface CachingProps {
+  handleChange: (a: string, b: any) => void
+  updatedSettings: IDevSettings
+}
