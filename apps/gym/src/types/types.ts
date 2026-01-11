@@ -257,3 +257,7 @@ export interface SplitSearchbarProps extends React.InputHTMLAttributes<HTMLInput
 export interface SplitCardProps {
   split: Split
 }
+
+export interface IDevSettings {
+  is_caching_enabled: boolean
+}
