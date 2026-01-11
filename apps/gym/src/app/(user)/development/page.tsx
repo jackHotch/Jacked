@@ -56,9 +56,9 @@ const Development = () => {
     <form className={styles.container} onSubmit={handleSubmit}>
       <h2>Development Settings</h2>
 
-      <div>
+      <div className={styles.settings_section}>
         <h4>Caching:</h4>
-        <ul>
+        <ul className={styles.settings_list}>
           <li>
             <Switch
               onValueChange={handleChange}
@@ -70,7 +70,10 @@ const Development = () => {
         </ul>
       </div>
 
-      {isDirty ? <Button.Primary type='submit'>Save</Button.Primary> : <Button.Disabled>Save</Button.Disabled>}
+      <div className={styles.footer}>
+        <Button.Secondary>Cancel</Button.Secondary>
+        {isDirty ? <Button.Primary type='submit'>Save</Button.Primary> : <Button.Disabled>Save</Button.Disabled>}
+      </div>
     </form>
   )
 }
