@@ -1,0 +1,10 @@
+.settings_list {
+  list-style-type: none;
+  margin-left: 16px;
+}
+
+.settings_section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
