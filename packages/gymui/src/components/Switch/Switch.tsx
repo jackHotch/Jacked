@@ -3,14 +3,14 @@ import styles from './Switch.module.css'
 import { motion } from 'motion/react'
 
 interface SwitchProps {
-  label: string
+  label?: string
   onValueChange?: (a: string, b: boolean) => void
   settingsKey?: string
   defaultValue?: boolean
   sx?: CSSProperties
 }
 
-export const Switch = ({ label, onValueChange, settingsKey, defaultValue = false, sx, ...props }: SwitchProps) => {
+export const Switch = ({ label = '', onValueChange, settingsKey, defaultValue = false, sx, ...props }: SwitchProps) => {
   const [checked, setChecked] = useState(defaultValue)
 
   useEffect(() => {
