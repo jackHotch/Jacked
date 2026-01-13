@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import styles from './development.module.css'
-import { Switch } from '@gymapp/gymui/Switch'
 import { Button } from '@gymapp/gymui/Button'
 import { useDevelopmentSettings } from '@/hooks/api/useDevelopmentSettings'
 import { useSetDevelopmentSettings } from '@/hooks/api/useSetDevelopmentSettings'
@@ -56,15 +55,21 @@ const Development = () => {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <h2>Development Settings</h2>
+      <h1 className={styles.header}>Development Settings</h1>
 
-      <UpdateDatabase />
+      <div className={styles.settings_section}>
+        <Caching handleChange={handleChange} updatedSettings={updatedSettings} />
 
-      <Caching handleChange={handleChange} updatedSettings={updatedSettings} />
+        <UpdateDatabase />
+      </div>
 
       <div className={styles.footer}>
-        <Button.Secondary>Cancel</Button.Secondary>
-        {isDirty ? <Button.Primary type='submit'>Save</Button.Primary> : <Button.Disabled>Save</Button.Disabled>}
+        <Button.Secondary>Reset Changes</Button.Secondary>
+        {isDirty ? (
+          <Button.Primary type='submit'>Save Changes</Button.Primary>
+        ) : (
+          <Button.Disabled>Save Changes</Button.Disabled>
+        )}
       </div>
     </form>
   )
