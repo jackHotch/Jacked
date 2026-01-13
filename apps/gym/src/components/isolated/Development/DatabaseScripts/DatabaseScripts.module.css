@@ -1,0 +1,16 @@
+.script_list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.script {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid black;
+}
+
+.script:hover {
+  background-color: var(--off-white);
+}
