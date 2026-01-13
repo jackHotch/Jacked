@@ -8,7 +8,7 @@ import { useSetDevelopmentSettings } from '@/hooks/api/useSetDevelopmentSettings
 import { toast } from '@gymapp/gymui/Toast'
 import { FormEvent } from '@/types'
 import { Caching } from '@/components/isolated/Development/Caching/Caching'
-import { UpdateDatabase } from '@/components/isolated/Development/UpdateDatabase/UpdateDatabase'
+import { UpdateDatabase } from '@/components/isolated/Development/DatabaseTools/DatabaseTools'
 
 const Development = () => {
   const { data, isLoading } = useDevelopmentSettings()

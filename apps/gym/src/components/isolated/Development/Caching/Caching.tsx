@@ -14,7 +14,7 @@ export function Caching({ handleChange, updatedSettings }: CachingProps) {
       <div className={sectionStyles.switch}>
         <div>
           <div>Enable cache</div>
-          <div className={sectionStyles.switch_description}>Cache API response for faster loading</div>
+          <div className={sectionStyles.description}>Cache API response for faster loading</div>
         </div>
         <Switch
           onValueChange={handleChange}

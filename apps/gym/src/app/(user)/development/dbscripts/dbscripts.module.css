@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  gap: 12px;
+}
+
+.back_button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (min-width: 990px) {
+  .container {
+    width: 900px;
+  }
+
+  
+}
