@@ -6,10 +6,7 @@ export function UpdateDatabase() {
     <div className={sectionStyles.section}>
       <h4>Update Database:</h4>
 
-      <ul className={styles.list}>
-        <li>Update Workouts Script</li>
-        <li>Update Weight Script</li>
-      </ul>
+      <p>Database Scripts </p>
     </div>
   )
 }

@@ -2,14 +2,24 @@
   display: flex;
   flex-direction: column;
   gap: 48px;
+  margin: auto;
+  position: relative;
+}
 
+.settings_section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .footer {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
   display: flex;
   gap: 8px;
   justify-content: flex-end;
+}
+
+@media (min-width: 990px) {
+  .container {
+    width: 900px;
+  }
 }
