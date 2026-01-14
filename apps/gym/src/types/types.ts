@@ -272,3 +272,12 @@ export interface ExecuteScriptProps {
     scriptId: string
   }
 }
+
+export interface ConfirmationModalProps {
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+  title: string
+  description: string
+  confirmButtonText?: string
+  destructive?: boolean
+}
