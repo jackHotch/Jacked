@@ -266,3 +266,9 @@ export interface CachingProps {
   handleChange: (a: string, b: any) => void
   updatedSettings: IDevSettings
 }
+
+export interface ExecuteScriptProps {
+  params: {
+    scriptId: string
+  }
+}
