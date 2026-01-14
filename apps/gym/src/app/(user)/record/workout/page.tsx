@@ -2,11 +2,7 @@
 
 import { useState } from 'react'
 import styles from './Workout.module.css'
-import {
-  AddExerciseModal,
-  WorkoutConfirmationModal,
-  Exercise,
-} from '@/components/isolated/Record'
+import { AddExerciseModal, WorkoutConfirmationModal, Exercise } from '@/components/isolated/Record'
 import { IWorkout } from '@/types'
 import { ButtonEvent } from '@/types'
 import { AnimatePresence } from 'motion/react'
@@ -20,8 +16,7 @@ const Workout = () => {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
   const [showConfirmationModal, setShowConfirmationModal] = useToggle()
   const { data, isLoading } = useWorkoutNumber()
-  const workoutNumber =
-    !isLoading && data?.data.count != null ? data.data.count + 1 : null
+  const workoutNumber = !isLoading && data?.data.count != null ? data.data.count + 1 : null
   const { mutate: createWorkout } = useCreateWorkout()
   const router = useRouter()
 
@@ -50,14 +45,7 @@ const Workout = () => {
           <div className={styles.exercises}>
             <AnimatePresence>
               {workout.map((_, key) => {
-                return (
-                  <Exercise
-                    workout={workout}
-                    setWorkout={setWorkout}
-                    index={key}
-                    key={key}
-                  />
-                )
+                return <Exercise workout={workout} setWorkout={setWorkout} index={key} key={key} />
               })}
             </AnimatePresence>
           </div>
