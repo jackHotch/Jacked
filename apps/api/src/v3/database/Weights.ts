@@ -1,6 +1,7 @@
 import { pool } from '../../db'
 import dotenv from 'dotenv'
 import { formatResponse } from '../../utils/utils'
+import { Parser } from 'json2csv'
 dotenv.config()
 
 export async function getAllWeight(userId: string) {
@@ -129,6 +130,46 @@ export async function getCurrentWeight(userId: string) {
     return formatResponse(200, { data: weight.rows[0] })
   } catch (err) {
     console.error('Error in GET /weights/current')
+    return formatResponse(500)
+  } finally {
+    client.release()
+  }
+}
+
+export async function exportWeight(userId: string) {
+  const client = await pool.connect()
+
+  try {
+    const weight = await client.query(
+      `SELECT * from weights WHERE user_id = $1`,
+      [userId]
+    )
+
+    if (weight.rowCount === 0) {
+      return formatResponse(404, { message: 'No data found'})
+    }
+
+    const weightHeaders = await client.query(
+      `
+      SELECT column_name
+      FROM information_schema.columns
+      WHERE table_name = 'weights' AND table_schema = 'public';
+      `
+    )
+    console.log(weightHeaders.rows)
+
+    if (weightHeaders.rowCount === 0) {
+      return formatResponse(404, { message: 'No headers found'})
+    }
+
+    const fields = weightHeaders.rows.map(col => col.column_name)
+    const opts = { fields }
+
+    const parser = new Parser(opts)
+    const csv = parser.parse(weight.rows)
+    return formatResponse(200, {data: csv})
+  } catch (err) {
+    console.error('Error in GET /weights/export', err)
     return formatResponse(500)
   } finally {
     client.release()
