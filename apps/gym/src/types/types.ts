@@ -280,4 +280,6 @@ export interface ConfirmationModalProps {
   description: string
   confirmButtonText?: string
   destructive?: boolean
+  onClick: () => void
+  isPending: boolean
 }

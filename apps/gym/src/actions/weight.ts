@@ -48,3 +48,12 @@ export const deleteWeight = async (id: number) => {
   return data
 }
 
+export const exportWeight = async () => {
+  const userId = await getSupabaseUserId()
+  const { data } = await axios.get(`${URL}/export`, {
+    params: {
+      userId: userId,
+    },
+  })
+  return data
+}

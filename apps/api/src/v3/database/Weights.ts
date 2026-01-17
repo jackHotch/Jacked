@@ -141,7 +141,7 @@ export async function exportWeight(userId: string) {
 
   try {
     const weight = await client.query(
-      `SELECT * from weights WHERE user_id = $1`,
+      `SELECT * from weights WHERE user_id = $1 ORDER BY date`,
       [userId]
     )
 
@@ -156,7 +156,6 @@ export async function exportWeight(userId: string) {
       WHERE table_name = 'weights' AND table_schema = 'public';
       `
     )
-    console.log(weightHeaders.rows)
 
     if (weightHeaders.rowCount === 0) {
       return formatResponse(404, { message: 'No headers found'})

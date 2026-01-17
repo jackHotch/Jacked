@@ -9,6 +9,8 @@ export const ConfirmationModal = ({
   description,
   confirmButtonText = '',
   destructive = false,
+  onClick,
+  isPending,
 }: ConfirmationModalProps) => {
   return (
     <Modal open={open} onOpenChange={setOpen}>
@@ -25,7 +27,11 @@ export const ConfirmationModal = ({
         ) : (
           <Modal.Footer>
             <Button.Danger onClick={() => setOpen(false)}>Cancel</Button.Danger>
-            <Button.Primary>{confirmButtonText}</Button.Primary>
+            {isPending ? (
+              <Button.Loading />
+            ) : (
+              <Button.Primary onClick={() => onClick()}>{confirmButtonText}</Button.Primary>
+            )}
           </Modal.Footer>
         )}
       </Modal.Content>
