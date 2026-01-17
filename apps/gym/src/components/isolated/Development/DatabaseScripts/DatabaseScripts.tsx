@@ -4,11 +4,19 @@ import styles from './DatabaseScripts.module.css'
 import { Terminal, Download, Upload, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { ConfirmationModal } from '../ConfirmationModal/ConfirmationModal'
+import { useExportWeight } from '@/hooks/api/useExportWeight'
 
 export const DatabaseScripts = () => {
   const [showCacheModal, setShowCacheModal] = useState(false)
   const [showExportWeightModal, setShowExportWeightModal] = useState(false)
   const router = useRouter()
+
+  const exportWeightMutation = useExportWeight()
+
+  const handleExportWeight = async () => {
+    await exportWeightMutation.mutateAsync()
+    setShowExportWeightModal(false)
+  }
 
   return (
     <>
@@ -60,6 +68,8 @@ export const DatabaseScripts = () => {
           title='Export Weight'
           description='Download weight data to a CSV file'
           confirmButtonText='Download'
+          onClick={handleExportWeight}
+          isPending={exportWeightMutation.isPending}
         />
       )}
       {showCacheModal && (
@@ -70,6 +80,8 @@ export const DatabaseScripts = () => {
           description='Remove all cached data from database'
           confirmButtonText='Delete'
           destructive={true}
+          onClick={() => null}
+          isPending={exportWeightMutation.isPending}
         />
       )}
     </>

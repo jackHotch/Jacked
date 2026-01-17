@@ -22,3 +22,11 @@ export const getChartData = (list: IWeightData[]) => {
 export const cssvar = (name: string) => {
   return window.getComputedStyle(document.documentElement).getPropertyValue(name)
 }
+
+export function getFormattedDate(date: Date) {
+  let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-indexed, so add 1
+  let day = date.getDate().toString().padStart(2, '0');
+  let year = date.getFullYear();
+
+  return `${year}-${month}-${day}`;
+}

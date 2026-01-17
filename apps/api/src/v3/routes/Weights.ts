@@ -35,12 +35,11 @@ router.get('/current', async (req: Request, res: Response) => {
 
 router.get('/export', async (req: Request, res: Response) => {
   const userId = req.query.userId as string
-  const date = getFormattedDate(new Date())
 
   const { statusCode, ...response } = await exportWeight(userId)
 
   res.setHeader('Content-Type', 'text/csv');
-  res.setHeader('Content-Disposition', `attachment; filename=${date} weight data.csv`);
+  res.setHeader('Content-Disposition', `attachment; filename=weight data.csv`);
   res.status(statusCode).json({ ...response })
 })
 
