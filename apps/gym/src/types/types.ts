@@ -267,7 +267,7 @@ export interface CachingProps {
   updatedSettings: IDevSettings
 }
 
-export interface ExecuteScriptProps {
+export interface ScriptIdProps {
   params: {
     scriptId: string
   }
@@ -282,4 +282,10 @@ export interface ConfirmationModalProps {
   destructive?: boolean
   onClick: () => void
   isPending: boolean
+}
+
+export interface ExecuteScriptProps {
+  title: string
+  description: string
+  onClick: () => void
 }
