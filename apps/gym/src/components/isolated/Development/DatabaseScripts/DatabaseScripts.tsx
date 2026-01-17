@@ -35,7 +35,7 @@ export const DatabaseScripts = () => {
             <Upload color='var(--primary)' />
           </div>
 
-          <div className={styles.script} onClick={() => router.push('/development/dbscripts/update-weight')}>
+          <div className={styles.script} onClick={() => router.push('/development/dbscripts/update-weights')}>
             <div>
               <div>Update Weight</div>
               <div className={sectionStyles.description}>Update weight table</div>
