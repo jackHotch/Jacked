@@ -8,6 +8,7 @@ import { CloseIcon } from '@gymapp/gymui/CloseIcon'
 
 export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProps) => {
   const [file, setFile] = useState(null)
+  const [isRunning, setIsRunning] = useState(false)
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -17,6 +18,10 @@ export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProp
 
   const removeFile = () => {
     setFile(null)
+  }
+
+  const executeScript = () => {
+    setIsRunning(true)
   }
 
   return (
@@ -36,7 +41,7 @@ export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProp
           </p>
         ) : (
           <>
-            <Upload color='var(--primary)' size={32} />
+            <Upload color='var(--text-gray)' size={32} />
             <input
               className={styles.file_input}
               type='file'
@@ -53,8 +58,24 @@ export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProp
       </div>
 
       <div className={styles.footer}>
-        <Button.Primary>Execute Script</Button.Primary>
+        {file ? (
+          <Button.Primary onClick={executeScript}>Execute Script</Button.Primary>
+        ) : (
+          <Button.Disabled>Execute Script</Button.Disabled>
+        )}
       </div>
+
+      {isRunning && (
+        <div className={styles.output_container}>
+          <p className={styles.output_header}>Output</p>
+          <div className={styles.output_messages}>
+            <p>$ Starting script</p>
+            <p>$ Runnning query</p>
+            <p>$ Extracting data</p>
+            <p>$ Finished script</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
