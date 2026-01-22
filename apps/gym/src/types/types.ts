@@ -287,5 +287,5 @@ export interface ConfirmationModalProps {
 export interface ExecuteScriptProps {
   title: string
   description: string
-  onClick: () => void
+  executeScript: () => void
 }

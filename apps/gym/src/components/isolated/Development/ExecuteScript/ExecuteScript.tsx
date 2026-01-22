@@ -6,7 +6,7 @@ import { Terminal, Upload, File } from 'lucide-react'
 import { useState } from 'react'
 import { CloseIcon } from '@gymapp/gymui/CloseIcon'
 
-export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProps) => {
+export const ExecuteScript = ({ title, description, executeScript }: ExecuteScriptProps) => {
   const [file, setFile] = useState(null)
   const [isRunning, setIsRunning] = useState(false)
 
@@ -20,8 +20,10 @@ export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProp
     setFile(null)
   }
 
-  const executeScript = () => {
+  const handleExecuteScript = () => {
     setIsRunning(true)
+    executeScript()
+    setIsRunning(false)
   }
 
   return (
@@ -59,7 +61,7 @@ export const ExecuteScript = ({ title, description, onClick }: ExecuteScriptProp
 
       <div className={styles.footer}>
         {file ? (
-          <Button.Primary onClick={executeScript}>Execute Script</Button.Primary>
+          <Button.Primary onClick={handleExecuteScript}>Execute Script</Button.Primary>
         ) : (
           <Button.Disabled>Execute Script</Button.Disabled>
         )}
