@@ -6,12 +6,5 @@ import { formatResponse } from '../../utils/utils'
 dotenv.config()
 
 function readCSV(file) {
-  return new Promise((resolve, reject) => {
-    const results = []
-    fs.createReadStream(filePath)
-      .pipe(csv())
-      .on('data', (data) => results.push(data))
-      .on('end', () => resolve(results))
-      .on('error', reject)
-  })
+  
 }
