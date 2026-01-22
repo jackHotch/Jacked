@@ -16,12 +16,12 @@ const ScriptId = ({ params }: ScriptIdProps) => {
     'update-workouts': {
       title: 'Update Workouts',
       description: 'Upload a file to replace the contents of the workout and workout_sets tables',
-      onClick: null,
+      executeScript: () => console.log('workout script executed'),
     },
     'update-weights': {
       title: 'Update Weights',
       description: 'Update weight table',
-      onClick: null,
+      executeScript: () => console.log('weight script executed'),
     },
   }
 
@@ -37,7 +37,7 @@ const ScriptId = ({ params }: ScriptIdProps) => {
       <ExecuteScript
         title={scriptConfig[scriptId].title}
         description={scriptConfig[scriptId].description}
-        onClick={scriptConfig[scriptId].onClick}
+        executeScript={scriptConfig[scriptId].executeScript}
       />
     </div>
   )
