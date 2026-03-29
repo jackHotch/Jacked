@@ -1,4 +1,4 @@
-import { pool } from '../../db'
+import { pool } from '../../config/db'
 import dotenv from 'dotenv'
 import { IExercises } from '../../globals'
 import { formatResponse } from '../../utils/utils'
@@ -8,10 +8,7 @@ dotenv.config()
 export async function getCurrentWorkoutCount(userId: string) {
   const client = await pool.connect()
   try {
-    const workoutCount = await client.query(
-      'SELECT COUNT(*)::int FROM workouts WHERE user_id = $1',
-      [userId]
-    )
+    const workoutCount = await client.query('SELECT COUNT(*)::int FROM workouts WHERE user_id = $1', [userId])
 
     if (workoutCount.rowCount !== 1) {
       return formatResponse(404, { message: 'Failed to get workout count' })
