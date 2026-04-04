@@ -16,12 +16,12 @@ const ScriptId = ({ params }: ScriptIdProps) => {
     'update-workouts': {
       title: 'Update Workouts',
       description: 'Upload a file to replace the contents of the workout and workout_sets tables',
-      executeScript: () => console.log('workout script executed'),
+      executeScript: (a) => console.log('workout script executed'),
     },
     'update-weights': {
       title: 'Update Weights',
       description: 'Update weight table',
-      executeScript: () => console.log('weight script executed'),
+      executeScript: (a) => console.log('weight script executed'),
     },
   }
 

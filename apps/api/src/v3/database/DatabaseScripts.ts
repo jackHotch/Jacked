@@ -1,10 +1,7 @@
-import { pool } from '../../db'
 import dotenv from 'dotenv'
-import fs from 'fs'
-import csv from 'csv-parser'
-import { formatResponse } from '../../utils/utils'
+import { IWeightImportData } from '../../globals'
 dotenv.config()
 
-function readCSV(file) {
-  
+export function createWeightEntries(userId: string, data: IWeightImportData[]) {
+  return data.map((obj) => ({ ...obj, user_id: userId }))
 }

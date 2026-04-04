@@ -5,6 +5,7 @@ import { Button } from '@gymapp/gymui/Button'
 import { Terminal, Upload, File } from 'lucide-react'
 import { useState } from 'react'
 import { CloseIcon } from '@gymapp/gymui/CloseIcon'
+import Papa from 'papaparse'
 
 export const ExecuteScript = ({ title, description, executeScript }: ExecuteScriptProps) => {
   const [file, setFile] = useState(null)
@@ -21,9 +22,20 @@ export const ExecuteScript = ({ title, description, executeScript }: ExecuteScri
   }
 
   const handleExecuteScript = () => {
+    if (!file) return
     setIsRunning(true)
-    executeScript()
-    setIsRunning(false)
+
+    const reader = new FileReader()
+
+    reader.onload = (e) => {
+      const text = e.target.result
+      const result = Papa.parse(text, { header: true, skipEmptyLines: true })
+
+      executeScript(result.data)
+      setIsRunning(false)
+    }
+
+    reader.readAsText(file)
   }
 
   return (
