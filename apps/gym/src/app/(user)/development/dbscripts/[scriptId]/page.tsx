@@ -7,11 +7,13 @@ import { Button } from '@gymapp/gymui/Button'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useRouter } from 'next/navigation'
 import { ExecuteScript } from '@/components/isolated/Development/ExecuteScript/ExecuteScript'
+import { useDevUpdateWeights } from '@/hooks/api/userDevResetWeights'
 
 const ScriptId = ({ params }: ScriptIdProps) => {
   const scriptId = params.scriptId
   const router = useRouter()
   const { mutateAsync: updateWorkouts } = useDevUpdateWorkouts()
+  const { mutateAsync: resetWeights } = useDevUpdateWeights()
   const scriptConfig = {
     'update-workouts': {
       title: 'Update Workouts',
@@ -21,7 +23,7 @@ const ScriptId = ({ params }: ScriptIdProps) => {
     'update-weights': {
       title: 'Update Weights',
       description: 'Update weight table',
-      executeScript: (a) => console.log('weight script executed'),
+      executeScript: resetWeights,
     },
   }
 

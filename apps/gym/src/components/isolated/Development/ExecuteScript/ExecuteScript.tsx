@@ -5,11 +5,14 @@ import { Button } from '@gymapp/gymui/Button'
 import { Terminal, Upload, File } from 'lucide-react'
 import { useState } from 'react'
 import { CloseIcon } from '@gymapp/gymui/CloseIcon'
+import { Error } from '@gymapp/gymui/Error'
 import Papa from 'papaparse'
 
 export const ExecuteScript = ({ title, description, executeScript }: ExecuteScriptProps) => {
   const [file, setFile] = useState(null)
   const [isRunning, setIsRunning] = useState(false)
+  const [isFinished, setIsFinished] = useState(false)
+  const [isSuccessful, setIsSuccessful] = useState(null)
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -27,11 +30,13 @@ export const ExecuteScript = ({ title, description, executeScript }: ExecuteScri
 
     const reader = new FileReader()
 
-    reader.onload = (e) => {
-      const text = e.target.result
+    reader.onload = async (e) => {
+      const text = e.target.result as string
       const result = Papa.parse(text, { header: true, skipEmptyLines: true })
 
-      executeScript(result.data)
+      const response = await executeScript(result.data)
+      setIsFinished(true)
+      setIsSuccessful(response?.statusCode == 200 ? true : false)
       setIsRunning(false)
     }
 
@@ -71,25 +76,21 @@ export const ExecuteScript = ({ title, description, executeScript }: ExecuteScri
         )}
       </div>
 
-      <div className={styles.footer}>
+      <div className={styles.footer} style={{ justifyContent: isFinished ? 'space-between' : 'flex-end' }}>
+        {isFinished ? (
+          isSuccessful ? (
+            <span style={{ color: 'var(--success)' }}>Script Executed Successfully!</span>
+          ) : (
+            <Error isVisible={true}>Script Failed</Error>
+          )
+        ) : null}
+
         {file ? (
           <Button.Primary onClick={handleExecuteScript}>Execute Script</Button.Primary>
         ) : (
           <Button.Disabled>Execute Script</Button.Disabled>
         )}
       </div>
-
-      {isRunning && (
-        <div className={styles.output_container}>
-          <p className={styles.output_header}>Output</p>
-          <div className={styles.output_messages}>
-            <p>$ Starting script</p>
-            <p>$ Runnning query</p>
-            <p>$ Extracting data</p>
-            <p>$ Finished script</p>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

@@ -82,14 +82,14 @@ export async function resetWeights(userId: string, data: IWeightImportData[]) {
     )
 
     if (weights.rowCount === 0 || weights.rowCount != data.length) {
-      return formatResponse(400, { message: 'Unable to update settings' })
+      return formatResponse(400, { message: 'Unable to update weights' })
     }
 
     await client.query('COMMIT')
-    return formatResponse(200, { message: 'Settings updated successfully' })
+    return formatResponse(200, { message: 'Weights updated successfully' })
   } catch (err) {
     await client.query('ROLLBACK')
-    console.error('Error in POST /development/settings:', err)
+    console.error('Error in POST /development/weights/reset:', err)
     return formatResponse(500)
   } finally {
     client.release()
