@@ -33,3 +33,8 @@ export interface loginFormData {
 export interface IDevSettings {
   is_caching_enabled: boolean
 }
+
+export interface IWeightImportData {
+  weight: number
+  date: string
+}
